@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CasaJusta Lanzarote — alquiler transparente para la isla</title>
+<meta name="description" content="Evalúa si tu alquiler es justo, compáralo con los datos reales de Lanzarote y súmate a la comunidad que exige transparencia en la vivienda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1814;
+    --paper:#ffffff;
+    --paper-dim:#f2eee2;
+    --blue:#0057B8;
+    --blue-dim:#dcedfa;
+    --yellow:#FFC72C;
+    --yellow-dim:#fff3d6;
+    --green:#1fa855;
+    --green-dim:#dcf3e4;
+    --coral:#ff4d29;
+    --coral-dim:#ffe4da;
+    --line: rgba(26,24,20,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', system-ui, sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    margin:0;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  .shutter{width:22px; height:14px; border-radius:2px; display:inline-block;}
+
+  /* header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0; gap:20px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand-mark{display:flex; flex-direction:column; gap:2px;}
+  .brand-mark .shutter:nth-child(1){background:var(--blue);}
+  .brand-mark .shutter:nth-child(2){background:var(--yellow);}
+  .brand-name{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px;}
+  .brand-name span{color:var(--blue);}
+  nav.links{display:flex; gap:28px; font-size:14px; font-weight:500;}
+  nav.links a{text-decoration:none; opacity:0.75;}
+  nav.links a:hover{opacity:1;}
+  .nav-right{display:flex; align-items:center; gap:16px; margin-left:auto;}
+  .lang-switch{display:flex; gap:6px;}
+  .lang-switch button{
+    background:transparent; border:1px solid var(--line); border-radius:6px;
+    padding:5px 8px; font-size:12px; font-weight:600; cursor:pointer;
+    color:var(--ink); opacity:0.55; font-family:inherit;
+  }
+  .lang-switch button:hover{opacity:0.85;}
+  .lang-switch button.active{opacity:1; border-color:var(--ink); background:var(--paper-dim);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:8px; border:1px solid var(--ink);
+    font-weight:600; font-size:14px; text-decoration:none; cursor:pointer;
+    background:transparent; color:var(--ink); font-family:inherit;
+  }
+  .btn-primary{background:var(--coral); border-color:var(--coral); color:var(--coral-dim);}
+  .btn-primary:hover{background:#e63d1a;}
+  .btn:hover{background:rgba(26,24,20,0.06);}
+
+  /* hero */
+  .hero{padding:88px 0 64px; position:relative;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;}
+  .eyebrow{
+    font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--coral); margin-bottom:16px; display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow .shutter{width:14px; height:9px; background:var(--coral);}
+  .hero h1{font-size:36px; max-width:600px;}
+  .hero p.lead{font-size:17px; color:#43403a; max-width:480px; margin:20px 0 28px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+
+  .facade{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+  }
+  .window{
+    aspect-ratio:3/4; border-radius:4px; background:var(--paper-dim);
+    border:2px solid var(--ink); position:relative; overflow:hidden;
+  }
+  .window::after{
+    content:''; position:absolute; inset:6px; border-radius:2px;
+  }
+  .window.b::after{background:var(--blue);}
+  .window.g::after{background:var(--green);}
+  .window.c::after{background:var(--coral);}
+  .window.y::after{background:var(--yellow);}
+  .window.o::after{background:transparent;}
+
+  /* stats */
+  .stats{padding:48px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:32px;}
+  .stat-num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; color:var(--blue);}
+  .stat-label{font-size:13px; color:#6b675f; margin-top:6px; max-width:180px;}
+
+  section{padding:80px 0;}
+  .section-head{max-width:600px; margin-bottom:48px;}
+  .section-head .eyebrow{color:var(--blue);}
+  .section-head .eyebrow .shutter{background:var(--blue);}
+  .section-head h2{font-size:30px;}
+  .section-head p{color:#5a564e; margin-top:14px; font-size:16px;}
+
+  /* how it works */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .step{border:1px solid var(--line); border-radius:12px; padding:26px; background:#fff;}
+  .step .shutter{margin-bottom:18px;}
+  .step h3{font-size:17px; margin-bottom:8px;}
+  .step p{font-size:14px; color:#5a564e; margin:0;}
+
+  /* evaluator */
+  .evaluator{background:var(--ink); border-radius:16px; padding:44px; color:var(--paper);}
+  .evaluator .section-head{margin-bottom:32px;}
+  .evaluator .section-head h2{color:var(--paper);}
+  .evaluator .section-head p{color:#c7c3b9;}
+  .evaluator .eyebrow{color:var(--coral);}
+  .evaluator .eyebrow .shutter{background:var(--coral);}
+  .ev-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:12px; color:#c7c3b9; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.04em;}
+  .field select, .field input{
+    width:100%; padding:11px 12px; border-radius:8px; border:1px solid #46433a;
+    background:#242019; color:var(--paper); font-family:inherit; font-size:14px;
+  }
+  .type-switch{display:flex; gap:8px;}
+  .type-btn{
+    flex:1; padding:10px 12px; border-radius:8px; border:1px solid #46433a;
+    background:#242019; color:var(--paper); font-family:inherit; font-size:13px;
+    font-weight:600; cursor:pointer; opacity:0.6;
+  }
+  .type-btn:hover{opacity:0.85;}
+  .type-btn.active{opacity:1; border-color:var(--paper); background:#332d22;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .row2.single-col{grid-template-columns:1fr;}
+  .row2 .field.hide{display:none;}
+  .ev-result{
+    background:#242019; border-radius:12px; padding:24px; display:flex; flex-direction:column; gap:16px;
+  }
+  .verdict{padding:14px 16px; border-radius:8px; display:flex; align-items:center; gap:12px;}
+  .verdict .shutter{width:16px; height:10px; flex-shrink:0;}
+  .verdict.ok{background:rgba(47,111,82,0.25);}
+  .verdict.warn{background:rgba(216,150,48,0.22);}
+  .verdict.bad{background:rgba(216,90,48,0.25);}
+  .verdict-title{font-weight:600; font-size:15px;}
+  .verdict-sub{font-size:13px; color:#c7c3b9; margin-top:2px;}
+  .ev-compare{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; text-align:center;}
+  .ev-compare div{background:#1a1712; border-radius:8px; padding:10px 6px;}
+  .ev-compare .label{font-size:10px; color:#8b8779; text-transform:uppercase;}
+  .ev-compare .val{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px; margin-top:4px;}
+  .ev-source{font-size:12px; color:#8b8779; margin-top:18px; line-height:1.5;}
+  .ev-source a{color:#c7c3b9;}
+
+  /* context */
+  .context{display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:start;}
+  .context-card{
+    border:1px solid var(--line); border-radius:12px; padding:24px; background:#fff;
+  }
+  .context-card + .context-card{margin-top:16px;}
+  .context-card h3{font-size:15px; margin-bottom:8px; display:flex; align-items:center; gap:8px;}
+  .context-card .shutter{width:14px; height:9px; background:var(--coral);}
+  .context-card p{font-size:14px; color:#5a564e; margin:0;}
+
+  /* cases */
+  .cases-list{display:flex; flex-direction:column; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff;}
+  .case-row{display:grid; grid-template-columns:auto 1fr auto; gap:16px; align-items:center; padding:16px 20px; border-bottom:1px solid var(--line);}
+  .case-row:last-child{border-bottom:none;}
+  .case-row .shutter{width:16px; height:10px;}
+  .case-zone{font-weight:600; font-size:14px;}
+  .case-detail{font-size:13px; color:#6b675f;}
+  .case-pct{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px;}
+  .case-pct.bad{color:var(--coral);}
+  .case-pct.warn{color:#c97c00;}
+  .case-bar-track{background:var(--paper-dim); border-radius:6px; height:6px; margin-top:8px; overflow:hidden;}
+  .case-bar-fill{height:100%; border-radius:6px;}
+  .case-bar-fill.ok{background:var(--green);}
+  .case-bar-fill.warn{background:#ffb020;}
+  .case-bar-fill.bad{background:var(--coral);}
+
+  /* actions */
+  .actions-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .action-card{border:1px solid var(--line); border-radius:12px; padding:24px; background:#fff; display:flex; flex-direction:column; gap:14px;}
+  .action-card h3{font-size:16px;}
+  .action-card p{font-size:14px; color:#5a564e; margin:0; flex-grow:1;}
+  .action-card .btn{width:100%; justify-content:center;}
+
+  footer{border-top:1px solid var(--line); padding:40px 0; margin-top:40px;}
+  .foot-grid{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .foot-note{font-size:13px; color:#7a7669; max-width:440px;}
+
+  /* modals */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(26,24,20,0.55); display:none;
+    align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:#fff; border-radius:14px; max-width:520px; width:100%;
+    padding:28px; max-height:85vh; overflow-y:auto; position:relative;
+  }
+  .modal h3{font-size:20px; margin-bottom:16px; padding-right:24px;}
+  .modal-close{
+    position:absolute; top:18px; right:18px; background:none; border:none;
+    font-size:22px; cursor:pointer; color:var(--ink); opacity:0.55; line-height:1;
+  }
+  .modal-close:hover{opacity:1;}
+  .assoc-item{border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px;}
+  .assoc-item:last-child{margin-bottom:0;}
+  .assoc-item h4{font-size:15px; margin-bottom:6px;}
+  .assoc-item p{font-size:13px; color:#5a564e; margin:0 0 8px;}
+  .assoc-item a{font-size:13px; font-weight:600; color:var(--blue); text-decoration:none;}
+  .msg-box{
+    background:var(--paper-dim); border-radius:10px; padding:16px; font-size:13px;
+    white-space:pre-wrap; line-height:1.5; margin:16px 0;
+  }
+
+  @media (max-width:860px){
+    .hero-grid, .ev-grid, .context, .steps, .actions-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .hero h1{font-size:34px;}
+    nav.links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="brand">
+      <span class="brand-mark">
+        <span class="shutter"></span>
+        <span class="shutter"></span>
+      </span>
+      <span class="brand-name">CasaJusta <span>Lanzarote</span></span>
+    </a>
+    <nav class="links">
+      <a href="#evaluar" data-i18n="nav_evaluar">Evaluar mi caso</a>
+      <a href="#contexto" data-i18n="nav_contexto">Por qué no hay límite</a>
+      <a href="#casos" data-i18n="nav_casos">Casos recientes</a>
+      <a href="#actuar" data-i18n="nav_actuar">Qué puedes hacer</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="it">IT</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a href="#evaluar" class="btn btn-primary" data-i18n="nav_cta">Evalúa tu alquiler</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="shutter"></span><span data-i18n="hero_eyebrow">Lanzarote, sin límite legal al alquiler</span></div>
+      <h1 data-i18n="hero_h1">No tengas miedo. Si nos callamos, dormiremos donde toman el sol los turistas.</h1>
+      <p class="lead" data-i18n="hero_lead">CasaJusta compara lo que te piden con lo que realmente se paga en tu zona, y te ayuda a actuar antes de firmar un precio abusivo o caer en un anuncio falso. Nadie te va a defender si tú no hablas primero.</p>
+      <div class="hero-actions">
+        <a href="#evaluar" class="btn btn-primary" data-i18n="hero_cta1">Evalúa tu caso ahora</a>
+        <a href="#casos" class="btn" data-i18n="hero_cta2">Ver casos de la isla</a>
+      </div>
+    </div>
+    <div class="facade">
+      <div class="window b"></div>
+      <div class="window o"></div>
+      <div class="window y"></div>
+      <div class="window o"></div>
+      <div class="window o"></div>
+      <div class="window c"></div>
+      <div class="window o"></div>
+      <div class="window b"></div>
+      <div class="window y"></div>
+      <div class="window o"></div>
+      <div class="window o"></div>
+      <div class="window b"></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div>
+      <div class="stat-num">0</div>
+      <div class="stat-label" data-i18n="stat1_label">municipios de Lanzarote con tope legal de alquiler</div>
+    </div>
+    <div>
+      <div class="stat-num">7</div>
+      <div class="stat-label" data-i18n="stat2_label">municipios de la isla, ninguno declarado zona tensionada</div>
+    </div>
+    <div>
+      <div class="stat-num">+30%</div>
+      <div class="stat-label" data-i18n="stat3_label">gasto en vivienda sobre el salario medio, según los criterios de la ley estatal</div>
+    </div>
+    <div>
+      <div class="stat-num">1</div>
+      <div class="stat-label" data-i18n="stat4_label">herramienta comunitaria para comparar y actuar, hecha por residentes</div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="shutter"></span><span data-i18n="how_eyebrow">Cómo funciona</span></div>
+      <h2 data-i18n="how_h2">Tres pasos antes de someterte a un precio</h2>
+      <p data-i18n="how_p">No hace falta aceptar en silencio. Antes de firmar, compara, y si algo huele mal, denúncialo.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="shutter" style="background:var(--blue);"></span>
+        <h3 data-i18n="step1_h">Introduce tu caso</h3>
+        <p data-i18n="step1_p">Zona, metros cuadrados y precio pedido. Un minuto, de forma anónima.</p>
+      </div>
+      <div class="step">
+        <span class="shutter" style="background:var(--yellow);"></span>
+        <h3 data-i18n="step2_h">Recibe una valoración</h3>
+        <p data-i18n="step2_p">Comparamos tu precio con la media real de tu zona, construida por la comunidad.</p>
+      </div>
+      <div class="step">
+        <span class="shutter" style="background:var(--coral);"></span>
+        <h3 data-i18n="step3_h">Actúa con datos</h3>
+        <p data-i18n="step3_p">Negocia con una contra-propuesta, contacta a una asociación, o publica el caso de forma anónima.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="evaluar">
+  <div class="wrap">
+    <div class="evaluator">
+      <div class="section-head">
+        <div class="eyebrow"><span class="shutter"></span><span data-i18n="ev_eyebrow">Evaluador de alquiler</span></div>
+        <h2 data-i18n="ev_h2">¿Cuánto deberías estar pagando?</h2>
+        <p data-i18n="ev_p">Estimación basada en una referencia única para toda Lanzarote, porque no existe un desglose oficial fiable por municipio (ver fuente abajo). Cuantas más personas participen, más precisa será.</p>
+        <p style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--paper); background:#242019; border:1px solid #46433a; border-radius:8px; padding:10px 14px; margin-top:16px; max-width:fit-content;">
+          <span class="shutter" style="width:14px; height:9px; background:var(--green); flex-shrink:0;"></span>
+          <span data-i18n="ev_anon">No pedimos tu nombre, ni tu email, ni la dirección exacta. Cada caso se evalúa de forma anónima.</span>
+        </p>
+      </div>
+      <div class="ev-grid">
+        <div>
+          <div class="field">
+            <label data-i18n="ev_label_type">Tipo de alquiler</label>
+            <div class="type-switch" id="typeSwitch">
+              <button type="button" class="type-btn active" data-type="full" data-i18n="ev_type_full">Vivienda completa</button>
+              <button type="button" class="type-btn" data-type="room" data-i18n="ev_type_room">Habitación</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="zone" data-i18n="ev_label_zone">Zona</label>
+            <select id="zone" onchange="evaluar()">
+              <option value="arrecife">Arrecife</option>
+              <option value="pdc">Puerto del Carmen</option>
+              <option value="teguise">Costa Teguise</option>
+              <option value="tias">Tías</option>
+              <option value="pblanca">Playa Blanca</option>
+              <option value="sanbartolome">San Bartolomé</option>
+            </select>
+          </div>
+          <div class="row2" id="row2Fields">
+            <div class="field" id="m2Field">
+              <label for="m2" data-i18n="ev_label_m2">Metros cuadrados</label>
+              <input type="number" id="m2" value="70" min="15" max="400">
+            </div>
+            <div class="field">
+              <label for="precio" data-i18n="ev_label_precio">Precio pedido (€/mes)</label>
+              <input type="number" id="precio" value="950" min="0">
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;" onclick="evaluar()" data-i18n="ev_btn">Calcular valoración</button>
+          <p class="ev-source" id="evSourceFull" data-i18n="ev_source_full">Fuente: 15,56 €/m²/mes, media de la provincia de Las Palmas, OBVIA / idealista, abril 2026. Última verificación: julio 2026. No existe índice oficial desglosado por municipio en Lanzarote.</p>
+          <p class="ev-source" id="evSourceRoom" style="display:none;" data-i18n="ev_source_room">Fuente: 509 €/mes de media por habitación en piso compartido en Lanzarote, informe de Drago Canarias, mayo 2025. Es el dato más reciente publicado; los precios reales pueden haber subido desde entonces.</p>
+        </div>
+        <div class="ev-result" id="resultado">
+          <div class="verdict ok" id="verdictBox">
+            <span class="shutter" style="background:var(--green);"></span>
+            <div>
+              <div class="verdict-title" id="verdictTitle" data-i18n="ev_placeholder_title">Introduce tus datos</div>
+              <div class="verdict-sub" id="verdictSub" data-i18n="ev_placeholder_sub">El resultado aparecerá aquí</div>
+            </div>
+          </div>
+          <div class="ev-compare">
+            <div>
+              <div class="label" data-i18n="ev_label_pedido">Pedido</div>
+              <div class="val" id="valPedido">—</div>
+            </div>
+            <div>
+              <div class="label" data-i18n="ev_label_media">Media zona</div>
+              <div class="val" id="valMedia">—</div>
+            </div>
+            <div>
+              <div class="label" data-i18n="ev_label_dif">Diferencia</div>
+              <div class="val" id="valDif">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contexto">
+  <div class="wrap context">
+    <div class="section-head" style="margin-bottom:0;">
+      <div class="eyebrow"><span class="shutter"></span><span data-i18n="ctx_eyebrow">Contexto legal</span></div>
+      <h2 data-i18n="ctx_h2">Por qué en Lanzarote no hay tope al alquiler</h2>
+      <p data-i18n="ctx_p">A diferencia de Cataluña o el País Vasco, en Canarias ningún municipio tiene declarada zona de mercado residencial tensionado. Esto es lo que ha pasado.</p>
+    </div>
+    <div>
+      <div class="context-card">
+        <h3><span class="shutter"></span><span data-i18n="ctx1_h">El Cabildo de Lanzarote lo rechazó</span></h3>
+        <p data-i18n="ctx1_p">En pleno, el grupo de gobierno del Cabildo rechazó declarar la isla zona residencial tensionada, argumentando que la medida tendría el efecto contrario al buscado.</p>
+      </div>
+      <div class="context-card">
+        <h3><span class="shutter"></span><span data-i18n="ctx2_h">Ningún ayuntamiento lo ha pedido</span></h3>
+        <p data-i18n="ctx2_p">De los siete municipios de la isla, solo Tías se interesó de forma informativa, sin ninguna aplicación ejecutiva. El resto no ha mostrado intención.</p>
+      </div>
+      <div class="context-card">
+        <h3><span class="shutter"></span><span data-i18n="ctx3_h">Canarias, sin ninguna zona declarada</span></h3>
+        <p data-i18n="ctx3_p">A día de hoy, ningún municipio canario cuenta con la declaración oficial que permitiría intervenir los precios del alquiler, a diferencia de más de 300 municipios en otras comunidades.</p>
+      </div>
+      <div class="context-card">
+        <h3><span class="shutter"></span><span data-i18n="ctx4_h">Sí hay límite… pero solo para el alquiler turístico</span></h3>
+        <p data-i18n="ctx4_p">Desde diciembre de 2025, la Ley 6/2025 de Ordenación Sostenible del Uso Turístico de Viviendas limita la vivienda vacacional a un máximo del 10% del suelo residencial (20% en La Palma, La Gomera y El Hierro), con una moratoria de 5 años para nuevas licencias. Es un avance real, pero no toca el precio del alquiler de larga duración: el problema que aborda esta web sigue sin límite legal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="casos">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="shutter"></span><span data-i18n="cases_eyebrow">Casos de la comunidad</span></div>
+      <h2 data-i18n="cases_h2">Publicados de forma anónima por residentes</h2>
+      <p data-i18n="cases_p">Zona, metros y desviación respecto a la media. Nunca se muestra información que identifique al inquilino ni la dirección exacta.</p>
+    </div>
+    <div class="cases-list" id="casesList"></div>
+  </div>
+</section>
+
+<section id="actuar">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="shutter"></span><span data-i18n="actions_eyebrow">Qué puedes hacer</span></div>
+      <h2 data-i18n="actions_h2">Convertir tu caso en algo útil para todos</h2>
+      <p data-i18n="actions_p">Actuar solo cansa. Actuar con datos y comunidad, cambia las cosas.</p>
+    </div>
+    <div class="actions-grid">
+      <div class="action-card">
+        <span class="shutter" style="background:var(--blue);"></span>
+        <h3 data-i18n="act1_h">Negocia con una contra-propuesta</h3>
+        <p data-i18n="act1_p">Genera un mensaje razonado con los datos de tu zona para enviar al propietario o a la inmobiliaria.</p>
+        <button type="button" class="btn" onclick="abrirMensaje()" data-i18n="act1_btn">Generar mensaje</button>
+      </div>
+      <div class="action-card">
+        <span class="shutter" style="background:var(--green);"></span>
+        <h3 data-i18n="act2_h">Contacta una asociación</h3>
+        <p data-i18n="act2_p">Conecta con colectivos de inquilinos activos en Canarias que pueden asesorarte de forma gratuita.</p>
+        <button type="button" class="btn" onclick="abrirAsociaciones()" data-i18n="act2_btn">Ver asociaciones</button>
+      </div>
+      <div class="action-card">
+        <span class="shutter" style="background:var(--coral);"></span>
+        <h3 data-i18n="act3_h">Firma para exigir cambios</h3>
+        <p data-i18n="act3_p">Súmate a la petición dirigida al Cabildo de Lanzarote para revisar su postura sobre la vivienda.</p>
+        <button type="button" class="btn" onclick="abrirFirmar()" data-i18n="act3_btn">Firmar ahora</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="brand">
+      <span class="brand-mark">
+        <span class="shutter"></span>
+        <span class="shutter"></span>
+      </span>
+      <span class="brand-name">CasaJusta <span>Lanzarote</span></span>
+    </div>
+    <p class="foot-note" data-i18n="footer_note">Proyecto comunitario e independiente. Los datos de zona son estimaciones agregadas y no constituyen asesoramiento legal ni inmobiliario.</p>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalMensaje">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button type="button" class="modal-close" onclick="closeModal('modalMensaje')">&times;</button>
+    <h3 data-i18n="msg_title">Mensaje para negociar</h3>
+    <div class="msg-box" id="msgBody"></div>
+    <button type="button" class="btn btn-primary" id="msgCopyBtn" onclick="copiarMensaje()" data-i18n="msg_copy">Copiar mensaje</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalAsociaciones">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button type="button" class="modal-close" onclick="closeModal('modalAsociaciones')">&times;</button>
+    <h3 data-i18n="assoc_title">Asociaciones que pueden ayudarte</h3>
+    <div class="assoc-item">
+      <h4 data-i18n="assoc_pah_name">PAH Lanzarote</h4>
+      <p data-i18n="assoc_pah_desc">Plataforma de Afectados por la Hipoteca. Asesoramiento gratuito sobre alquiler, hipoteca y desahucios. Asamblea los viernes a las 17:30 en la Casa de la Juventud, Arrecife.</p>
+      <a href="mailto:pahlanzarote@gmail.com">pahlanzarote@gmail.com</a> · <a href="tel:+34685568333">685 568 333</a>
+    </div>
+    <div class="assoc-item">
+      <h4 data-i18n="assoc_sigc_name">Sindicato de Inquilinas de Gran Canaria</h4>
+      <p data-i18n="assoc_sigc_desc">Organización de inquilinos que también orienta a personas de otras islas canarias con problemas de vivienda.</p>
+      <a href="https://sindicatodeinquilinasgc.noblogs.org/" target="_blank" rel="noopener">sindicatodeinquilinasgc.noblogs.org</a>
+    </div>
+    <div class="assoc-item">
+      <h4 data-i18n="assoc_sit_name">Sindicato de Inquilinas de Tenerife (SIT)</h4>
+      <p data-i18n="assoc_sit_desc">Sindicato de inquilinos que apoya a familias afectadas por desahucios y abusos en el alquiler.</p>
+      <a href="https://www.facebook.com/SindicatoInquilinasTF/" target="_blank" rel="noopener">facebook.com/SindicatoInquilinasTF</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalFirmar">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button type="button" class="modal-close" onclick="closeModal('modalFirmar')">&times;</button>
+    <h3 data-i18n="sign_title">Firma para exigir cambios</h3>
+    <p data-i18n="sign_body">Vamos a abrir tu cliente de email con un mensaje ya redactado dirigido al Cabildo de Lanzarote. Puedes revisarlo y editarlo antes de enviarlo — nada se envía automáticamente.</p>
+    <a href="#" id="signMailtoBtn" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;" data-i18n="sign_btn">Abrir email para firmar</a>
+  </div>
+</div>
+
+<script>
+// Único valor porque no existe un índice oficial fiable desglosado por municipio en Lanzarote (ver fuente en el evaluador)
+const AVG_PER_M2 = 15.56;
+// Precio fijo (no escala con m²): mercado de habitación en piso compartido, distinto del de vivienda completa
+const ROOM_AVG = 509;
+let currentType = 'full';
+
+const zoneNames = {
+  arrecife: "Arrecife", pdc: "Puerto del Carmen", teguise: "Costa Teguise",
+  tias: "Tías", pblanca: "Playa Blanca", sanbartolome: "San Bartolomé"
+};
+
+const casesData = [
+  { zone: "pdc", m2: 65, precio: 1100, media: 728 },
+  { zone: "arrecife", m2: 55, precio: 680, media: 528 },
+  { zone: "pblanca", m2: 80, precio: 1350, media: 864 }
+];
+
+const translations = {
+  es: {
+    meta_title: "CasaJusta Lanzarote — alquiler transparente para la isla",
+    meta_desc: "Evalúa si tu alquiler es justo, compáralo con los datos reales de Lanzarote y súmate a la comunidad que exige transparencia en la vivienda.",
+    nav_evaluar: "Evaluar mi caso", nav_contexto: "Por qué no hay límite", nav_casos: "Casos recientes",
+    nav_actuar: "Qué puedes hacer", nav_cta: "Evalúa tu alquiler",
+    hero_eyebrow: "Lanzarote, sin límite legal al alquiler",
+    hero_h1: "No tengas miedo. Si nos callamos, dormiremos donde toman el sol los turistas.",
+    hero_lead: "CasaJusta compara lo que te piden con lo que realmente se paga en tu zona, y te ayuda a actuar antes de firmar un precio abusivo o caer en un anuncio falso. Nadie te va a defender si tú no hablas primero.",
+    hero_cta1: "Evalúa tu caso ahora", hero_cta2: "Ver casos de la isla",
+    stat1_label: "municipios de Lanzarote con tope legal de alquiler",
+    stat2_label: "municipios de la isla, ninguno declarado zona tensionada",
+    stat3_label: "gasto en vivienda sobre el salario medio, según los criterios de la ley estatal",
+    stat4_label: "herramienta comunitaria para comparar y actuar, hecha por residentes",
+    how_eyebrow: "Cómo funciona", how_h2: "Tres pasos antes de someterte a un precio",
+    how_p: "No hace falta aceptar en silencio. Antes de firmar, compara, y si algo huele mal, denúncialo.",
+    step1_h: "Introduce tu caso", step1_p: "Zona, metros cuadrados y precio pedido. Un minuto, de forma anónima.",
+    step2_h: "Recibe una valoración", step2_p: "Comparamos tu precio con la media real de tu zona, construida por la comunidad.",
+    step3_h: "Actúa con datos", step3_p: "Negocia con una contra-propuesta, contacta a una asociación, o publica el caso de forma anónima.",
+    ev_eyebrow: "Evaluador de alquiler", ev_h2: "¿Cuánto deberías estar pagando?",
+    ev_p: "Estimación basada en una referencia única para toda Lanzarote, porque no existe un desglose oficial fiable por municipio (ver fuente abajo). Cuantas más personas participen, más precisa será.",
+    ev_anon: "No pedimos tu nombre, ni tu email, ni la dirección exacta. Cada caso se evalúa de forma anónima.",
+    ev_label_type: "Tipo de alquiler", ev_type_full: "Vivienda completa", ev_type_room: "Habitación",
+    ev_label_zone: "Zona", ev_label_m2: "Metros cuadrados", ev_label_precio: "Precio pedido (€/mes)",
+    ev_btn: "Calcular valoración",
+    ev_source_full: "Fuente: 15,56 €/m²/mes, media de la provincia de Las Palmas, OBVIA / idealista, abril 2026. Última verificación: julio 2026. No existe índice oficial desglosado por municipio en Lanzarote.",
+    ev_source_room: "Fuente: 509 €/mes de media por habitación en piso compartido en Lanzarote, informe de Drago Canarias, mayo 2025. Es el dato más reciente publicado; los precios reales pueden haber subido desde entonces.",
+    ev_placeholder_title: "Introduce tus datos", ev_placeholder_sub: "El resultado aparecerá aquí",
+    ev_label_pedido: "Pedido", ev_label_media: "Media zona", ev_label_dif: "Diferencia",
+    verdict_ok: "En línea con el mercado", verdict_warn: "Por encima de la media", verdict_bad: "Fuera de control",
+    ctx_eyebrow: "Contexto legal", ctx_h2: "Por qué en Lanzarote no hay tope al alquiler",
+    ctx_p: "A diferencia de Cataluña o el País Vasco, en Canarias ningún municipio tiene declarada zona de mercado residencial tensionado. Esto es lo que ha pasado.",
+    ctx1_h: "El Cabildo de Lanzarote lo rechazó",
+    ctx1_p: "En pleno, el grupo de gobierno del Cabildo rechazó declarar la isla zona residencial tensionada, argumentando que la medida tendría el efecto contrario al buscado.",
+    ctx2_h: "Ningún ayuntamiento lo ha pedido",
+    ctx2_p: "De los siete municipios de la isla, solo Tías se interesó de forma informativa, sin ninguna aplicación ejecutiva. El resto no ha mostrado intención.",
+    ctx3_h: "Canarias, sin ninguna zona declarada",
+    ctx3_p: "A día de hoy, ningún municipio canario cuenta con la declaración oficial que permitiría intervenir los precios del alquiler, a diferencia de más de 300 municipios en otras comunidades.",
+    ctx4_h: "Sí hay límite… pero solo para el alquiler turístico",
+    ctx4_p: "Desde diciembre de 2025, la Ley 6/2025 de Ordenación Sostenible del Uso Turístico de Viviendas limita la vivienda vacacional a un máximo del 10% del suelo residencial (20% en La Palma, La Gomera y El Hierro), con una moratoria de 5 años para nuevas licencias. Es un avance real, pero no toca el precio del alquiler de larga duración: el problema que aborda esta web sigue sin límite legal.",
+    cases_eyebrow: "Casos de la comunidad", cases_h2: "Publicados de forma anónima por residentes",
+    cases_p: "Zona, metros y desviación respecto a la media. Nunca se muestra información que identifique al inquilino ni la dirección exacta.",
+    actions_eyebrow: "Qué puedes hacer", actions_h2: "Convertir tu caso en algo útil para todos",
+    actions_p: "Actuar solo cansa. Actuar con datos y comunidad, cambia las cosas.",
+    act1_h: "Negocia con una contra-propuesta",
+    act1_p: "Genera un mensaje razonado con los datos de tu zona para enviar al propietario o a la inmobiliaria.",
+    act1_btn: "Generar mensaje",
+    act2_h: "Contacta una asociación",
+    act2_p: "Conecta con colectivos de inquilinos activos en Canarias que pueden asesorarte de forma gratuita.",
+    act2_btn: "Ver asociaciones",
+    act3_h: "Firma para exigir cambios",
+    act3_p: "Súmate a la petición dirigida al Cabildo de Lanzarote para revisar su postura sobre la vivienda.",
+    act3_btn: "Firmar ahora",
+    footer_note: "Proyecto comunitario e independiente. Los datos de zona son estimaciones agregadas y no constituyen asesoramiento legal ni inmobiliario.",
+    msg_title: "Mensaje para negociar", msg_intro_needdata: "Primero calcula tu valoración en el evaluador para generar un mensaje con tus datos.",
+    msg_copy: "Copiar mensaje", msg_copied: "¡Copiado!",
+    assoc_title: "Asociaciones que pueden ayudarte",
+    assoc_pah_name: "PAH Lanzarote",
+    assoc_pah_desc: "Plataforma de Afectados por la Hipoteca. Asesoramiento gratuito sobre alquiler, hipoteca y desahucios. Asamblea los viernes a las 17:30 en la Casa de la Juventud, Arrecife.",
+    assoc_sigc_name: "Sindicato de Inquilinas de Gran Canaria",
+    assoc_sigc_desc: "Organización de inquilinos que también orienta a personas de otras islas canarias con problemas de vivienda.",
+    assoc_sit_name: "Sindicato de Inquilinas de Tenerife (SIT)",
+    assoc_sit_desc: "Sindicato de inquilinos que apoya a familias afectadas por desahucios y abusos en el alquiler.",
+    sign_title: "Firma para exigir cambios",
+    sign_body: "Vamos a abrir tu cliente de email con un mensaje ya redactado dirigido al Cabildo de Lanzarote. Puedes revisarlo y editarlo antes de enviarlo — nada se envía automáticamente.",
+    sign_btn: "Abrir email para firmar",
+    sign_subject: "Petición: revisar la postura del Cabildo sobre el precio del alquiler en Lanzarote",
+    sign_email_body: "Estimado Cabildo de Lanzarote,\n\nMe sumo a la petición ciudadana impulsada por CasaJusta Lanzarote para pedir que se revise la decisión de no declarar la isla zona de mercado residencial tensionado, y que se tomen medidas efectivas frente al precio del alquiler.\n\nCientos de residentes no pueden acceder a una vivienda digna a precios razonables. Pido que este tema se trate con la urgencia que merece.\n\nGracias por su atención."
+  },
+  it: {
+    meta_title: "CasaJusta Lanzarote — affitti trasparenti per l'isola",
+    meta_desc: "Valuta se il tuo affitto è equo, confrontalo con i dati reali di Lanzarote e unisciti alla comunità che chiede trasparenza sulla casa.",
+    nav_evaluar: "Valuta il mio caso", nav_contexto: "Perché non c'è un limite", nav_casos: "Casi recenti",
+    nav_actuar: "Cosa puoi fare", nav_cta: "Valuta il tuo affitto",
+    hero_eyebrow: "Lanzarote, nessun limite legale all'affitto",
+    hero_h1: "Non avere paura. Se stiamo zitti, dormiremo dove i turisti prendono il sole.",
+    hero_lead: "CasaJusta confronta quello che ti chiedono con quello che si paga davvero nella tua zona, e ti aiuta ad agire prima di firmare un prezzo abusivo o cadere in un annuncio falso. Nessuno ti difenderà se non parli per primo.",
+    hero_cta1: "Valuta subito il tuo caso", hero_cta2: "Guarda i casi dell'isola",
+    stat1_label: "comuni di Lanzarote con un limite legale all'affitto",
+    stat2_label: "comuni dell'isola, nessuno dichiarato zona di mercato teso",
+    stat3_label: "spesa per la casa sul salario medio, secondo i criteri della legge statale",
+    stat4_label: "strumento comunitario per confrontare e agire, creato dai residenti",
+    how_eyebrow: "Come funziona", how_h2: "Tre passi prima di accettare un prezzo",
+    how_p: "Non serve accettare in silenzio. Prima di firmare, confronta, e se qualcosa non torna, denuncialo.",
+    step1_h: "Inserisci il tuo caso", step1_p: "Zona, metri quadrati e prezzo richiesto. Un minuto, in forma anonima.",
+    step2_h: "Ricevi una valutazione", step2_p: "Confrontiamo il tuo prezzo con la media reale della tua zona, costruita dalla comunità.",
+    step3_h: "Agisci con i dati", step3_p: "Negozia con una controproposta, contatta un'associazione, o pubblica il caso in forma anonima.",
+    ev_eyebrow: "Valutatore di affitto", ev_h2: "Quanto dovresti davvero pagare?",
+    ev_p: "Stima basata su un riferimento unico per tutta Lanzarote, perché non esiste un dato ufficiale affidabile per comune (vedi fonte sotto). Più persone partecipano, più sarà precisa.",
+    ev_anon: "Non chiediamo il tuo nome, la tua email, né l'indirizzo esatto. Ogni caso è valutato in forma anonima.",
+    ev_label_type: "Tipo di affitto", ev_type_full: "Casa intera", ev_type_room: "Stanza",
+    ev_label_zone: "Zona", ev_label_m2: "Metri quadrati", ev_label_precio: "Prezzo richiesto (€/mese)",
+    ev_btn: "Calcola la valutazione",
+    ev_source_full: "Fonte: 15,56 €/m²/mese, media della provincia di Las Palmas, OBVIA / idealista, aprile 2026. Ultima verifica: luglio 2026. Non esiste un indice ufficiale per comune a Lanzarote.",
+    ev_source_room: "Fonte: 509 €/mese di media per una stanza in un appartamento condiviso a Lanzarote, rapporto Drago Canarias, maggio 2025. È il dato più recente pubblicato; i prezzi reali potrebbero essere saliti da allora.",
+    ev_placeholder_title: "Inserisci i tuoi dati", ev_placeholder_sub: "Il risultato apparirà qui",
+    ev_label_pedido: "Richiesto", ev_label_media: "Media zona", ev_label_dif: "Differenza",
+    verdict_ok: "In linea con il mercato", verdict_warn: "Sopra la media", verdict_bad: "Fuori controllo",
+    ctx_eyebrow: "Contesto legale", ctx_h2: "Perché a Lanzarote non c'è un limite all'affitto",
+    ctx_p: "A differenza della Catalogna o dei Paesi Baschi, nelle Canarie nessun comune è stato dichiarato zona di mercato residenziale teso. Ecco cosa è successo.",
+    ctx1_h: "Il Cabildo di Lanzarote lo ha respinto",
+    ctx1_p: "In seduta plenaria, il gruppo di governo del Cabildo ha respinto la dichiarazione dell'isola come zona residenziale tesa, sostenendo che la misura avrebbe avuto l'effetto opposto.",
+    ctx2_h: "Nessun comune lo ha richiesto",
+    ctx2_p: "Dei sette comuni dell'isola, solo Tías ha mostrato un interesse informale, senza alcuna applicazione esecutiva. Gli altri non hanno mostrato intenzione.",
+    ctx3_h: "Canarie, nessuna zona dichiarata",
+    ctx3_p: "Ad oggi, nessun comune delle Canarie ha la dichiarazione ufficiale che permetterebbe di intervenire sui prezzi degli affitti, a differenza di oltre 300 comuni in altre regioni.",
+    ctx4_h: "Un limite c'è — ma solo per gli affitti turistici",
+    ctx4_p: "Da dicembre 2025, la Legge 6/2025 sulla Regolamentazione Sostenibile dell'Uso Turistico delle Abitazioni limita gli affitti turistici a un massimo del 10% del suolo residenziale (20% a La Palma, La Gomera e El Hierro), con una moratoria di 5 anni per le nuove licenze. È un progresso reale, ma non tocca i prezzi degli affitti a lungo termine: il problema affrontato da questo sito resta senza limite legale.",
+    cases_eyebrow: "Casi della comunità", cases_h2: "Pubblicati in forma anonima dai residenti",
+    cases_p: "Zona, metri e scostamento dalla media. Non mostriamo mai informazioni che identifichino l'inquilino né l'indirizzo esatto.",
+    actions_eyebrow: "Cosa puoi fare", actions_h2: "Trasforma il tuo caso in qualcosa di utile per tutti",
+    actions_p: "Agire da soli stanca. Agire con dati e comunità cambia le cose.",
+    act1_h: "Negozia con una controproposta",
+    act1_p: "Genera un messaggio motivato con i dati della tua zona da inviare al proprietario o all'agenzia.",
+    act1_btn: "Genera messaggio",
+    act2_h: "Contatta un'associazione",
+    act2_p: "Mettiti in contatto con collettivi di inquilini attivi nelle Canarie che possono aiutarti gratuitamente.",
+    act2_btn: "Vedi associazioni",
+    act3_h: "Firma per chiedere il cambiamento",
+    act3_p: "Unisciti alla petizione rivolta al Cabildo de Lanzarote per rivedere la sua posizione sulla casa.",
+    act3_btn: "Firma ora",
+    footer_note: "Progetto comunitario e indipendente. I dati di zona sono stime aggregate e non costituiscono consulenza legale o immobiliare.",
+    msg_title: "Messaggio per negoziare", msg_intro_needdata: "Calcola prima la tua valutazione nel valutatore per generare un messaggio con i tuoi dati.",
+    msg_copy: "Copia messaggio", msg_copied: "Copiato!",
+    assoc_title: "Associazioni che possono aiutarti",
+    assoc_pah_name: "PAH Lanzarote",
+    assoc_pah_desc: "Piattaforma delle persone colpite dal mutuo. Consulenza gratuita su affitto, mutuo e sfratti. Assemblea il venerdì alle 17:30 alla Casa de la Juventud, Arrecife.",
+    assoc_sigc_name: "Sindacato degli Inquilini di Gran Canaria",
+    assoc_sigc_desc: "Sindacato degli inquilini che orienta anche persone di altre isole Canarie con problemi abitativi.",
+    assoc_sit_name: "Sindacato degli Inquilini di Tenerife (SIT)",
+    assoc_sit_desc: "Sindacato degli inquilini che sostiene le famiglie colpite da sfratti e abusi negli affitti.",
+    sign_title: "Firma per chiedere il cambiamento",
+    sign_body: "Apriremo il tuo client di posta con un messaggio già scritto indirizzato al Cabildo di Lanzarote. Puoi rivederlo e modificarlo prima di inviarlo — non viene inviato nulla automaticamente.",
+    sign_btn: "Apri email per firmare",
+    sign_subject: "Petizione: rivedere la posizione del Cabildo sui prezzi degli affitti a Lanzarote",
+    sign_email_body: "Gentile Cabildo di Lanzarote,\n\nMi unisco alla petizione cittadina promossa da CasaJusta Lanzarote per chiedere di rivedere la decisione di non dichiarare l'isola zona di mercato residenziale teso, e di adottare misure efficaci sul prezzo degli affitti.\n\nCentinaia di residenti non possono accedere a un alloggio dignitoso a prezzi ragionevoli. Chiedo che questo tema venga trattato con l'urgenza che merita.\n\nGrazie per l'attenzione."
+  },
+  en: {
+    meta_title: "CasaJusta Lanzarote — transparent renting for the island",
+    meta_desc: "Check whether your rent is fair, compare it with real data from Lanzarote, and join the community demanding housing transparency.",
+    nav_evaluar: "Evaluate my case", nav_contexto: "Why there's no cap", nav_casos: "Recent cases",
+    nav_actuar: "What you can do", nav_cta: "Evaluate your rent",
+    hero_eyebrow: "Lanzarote, no legal cap on rent",
+    hero_h1: "Don't be afraid. If we stay silent, we'll sleep where the tourists sunbathe.",
+    hero_lead: "CasaJusta compares what you're being asked to pay with what people actually pay in your area, and helps you act before signing an abusive price or falling for a fake listing. No one will defend you if you don't speak up first.",
+    hero_cta1: "Evaluate your case now", hero_cta2: "See cases from the island",
+    stat1_label: "municipalities in Lanzarote with a legal rent cap",
+    stat2_label: "municipalities on the island, none declared a stressed market area",
+    stat3_label: "housing spend over average salary, per the criteria of the state law",
+    stat4_label: "community tool to compare and act, built by residents",
+    how_eyebrow: "How it works", how_h2: "Three steps before you accept a price",
+    how_p: "You don't have to accept in silence. Before signing, compare — and if something smells wrong, report it.",
+    step1_h: "Enter your case", step1_p: "Area, square meters and asking price. One minute, anonymous.",
+    step2_h: "Get an assessment", step2_p: "We compare your price with the real average for your area, built by the community.",
+    step3_h: "Act with data", step3_p: "Negotiate a counter-offer, contact an association, or publish your case anonymously.",
+    ev_eyebrow: "Rent evaluator", ev_h2: "How much should you actually be paying?",
+    ev_p: "Estimate based on a single reference for all of Lanzarote, because no reliable official breakdown by municipality exists (see source below). The more people take part, the more accurate it gets.",
+    ev_anon: "We don't ask for your name, your email, or your exact address. Every case is evaluated anonymously.",
+    ev_label_type: "Rental type", ev_type_full: "Whole home", ev_type_room: "Room",
+    ev_label_zone: "Area", ev_label_m2: "Square meters", ev_label_precio: "Asking price (€/month)",
+    ev_btn: "Calculate assessment",
+    ev_source_full: "Source: €15.56/m²/month, Las Palmas province average, OBVIA / idealista, April 2026. Last checked: July 2026. No official municipality-level index exists for Lanzarote.",
+    ev_source_room: "Source: €509/month average for a room in a shared flat in Lanzarote, Drago Canarias report, May 2025. It's the most recent published figure; real prices may have risen since then.",
+    ev_placeholder_title: "Enter your details", ev_placeholder_sub: "The result will appear here",
+    ev_label_pedido: "Asked", ev_label_media: "Area average", ev_label_dif: "Difference",
+    verdict_ok: "In line with the market", verdict_warn: "Above average", verdict_bad: "Out of control",
+    ctx_eyebrow: "Legal context", ctx_h2: "Why there's no rent cap in Lanzarote",
+    ctx_p: "Unlike Catalonia or the Basque Country, no municipality in the Canary Islands has been declared a stressed residential market area. Here's what happened.",
+    ctx1_h: "The Cabildo de Lanzarote rejected it",
+    ctx1_p: "In a plenary session, the Cabildo's governing group rejected declaring the island a stressed residential area, arguing the measure would backfire.",
+    ctx2_h: "No town council has requested it",
+    ctx2_p: "Of the island's seven municipalities, only Tías showed informal interest, with no executive follow-through. The rest have shown no intention.",
+    ctx3_h: "Canary Islands, no area declared",
+    ctx3_p: "As of today, no Canarian municipality has the official declaration that would allow intervening on rental prices, unlike more than 300 municipalities in other regions.",
+    ctx4_h: "There is a cap — but only on vacation rentals",
+    ctx4_p: "Since December 2025, Law 6/2025 on the Sustainable Regulation of Tourist Use of Housing caps vacation rentals at a maximum of 10% of residential land (20% in La Palma, La Gomera and El Hierro), with a 5-year moratorium on new licenses. It's real progress, but it doesn't touch long-term rental prices — the problem this site addresses still has no legal cap.",
+    cases_eyebrow: "Community cases", cases_h2: "Published anonymously by residents",
+    cases_p: "Area, size and deviation from the average. We never show information that identifies the tenant or the exact address.",
+    actions_eyebrow: "What you can do", actions_h2: "Turn your case into something useful for everyone",
+    actions_p: "Acting alone is exhausting. Acting with data and community changes things.",
+    act1_h: "Negotiate a counter-offer",
+    act1_p: "Generate a reasoned message with your area's data to send to the landlord or agency.",
+    act1_btn: "Generate message",
+    act2_h: "Contact an association",
+    act2_p: "Connect with active tenant groups in the Canary Islands who can advise you for free.",
+    act2_btn: "See associations",
+    act3_h: "Sign to demand change",
+    act3_p: "Join the petition addressed to the Cabildo de Lanzarote to review its stance on housing.",
+    act3_btn: "Sign now",
+    footer_note: "Independent community project. Area data is aggregated estimates and does not constitute legal or real-estate advice.",
+    msg_title: "Message to negotiate", msg_intro_needdata: "First calculate your assessment in the evaluator to generate a message with your data.",
+    msg_copy: "Copy message", msg_copied: "Copied!",
+    assoc_title: "Associations that can help you",
+    assoc_pah_name: "PAH Lanzarote",
+    assoc_pah_desc: "Platform for People Affected by Mortgages. Free advice on rent, mortgages and evictions. Assembly Fridays at 17:30 at Casa de la Juventud, Arrecife.",
+    assoc_sigc_name: "Gran Canaria Tenants' Union",
+    assoc_sigc_desc: "Tenants' union that also guides people from other Canary Islands facing housing problems.",
+    assoc_sit_name: "Tenerife Tenants' Union (SIT)",
+    assoc_sit_desc: "Tenants' union supporting families affected by evictions and rental abuse.",
+    sign_title: "Sign to demand change",
+    sign_body: "We'll open your email client with a message already drafted to the Cabildo de Lanzarote. You can review and edit it before sending — nothing is sent automatically.",
+    sign_btn: "Open email to sign",
+    sign_subject: "Petition: review the Cabildo's stance on rental prices in Lanzarote",
+    sign_email_body: "Dear Cabildo de Lanzarote,\n\nI'm joining the citizen petition led by CasaJusta Lanzarote asking you to review the decision not to declare the island a stressed residential market area, and to take effective action on rental prices.\n\nHundreds of residents cannot access decent housing at reasonable prices. I ask that this issue be treated with the urgency it deserves.\n\nThank you for your attention."
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'es';
+let state = {};
+
+function t(key){
+  return (translations[currentLang] && translations[currentLang][key]) || translations.es[key] || key;
+}
+
+function fmtEUR(n){
+  const locale = currentLang === 'es' ? 'es-ES' : currentLang === 'it' ? 'it-IT' : 'en-GB';
+  return n.toLocaleString(locale) + ' €';
+}
+
+function applyI18n(){
+  document.documentElement.lang = currentLang;
+  document.title = t('meta_title');
+  document.querySelector('meta[name="description"]').setAttribute('content', t('meta_desc'));
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll('#langSwitch button').forEach(function(btn){
+    btn.classList.toggle('active', btn.dataset.lang === currentLang);
+  });
+  updateSignMailto();
+}
+
+function setLang(lang){
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  applyI18n();
+  renderCases();
+  evaluar();
+}
+
+function setType(type){
+  currentType = type;
+  document.querySelectorAll('#typeSwitch .type-btn').forEach(function(btn){
+    btn.classList.toggle('active', btn.dataset.type === type);
+  });
+  document.getElementById('m2Field').classList.toggle('hide', type === 'room');
+  document.getElementById('row2Fields').classList.toggle('single-col', type === 'room');
+  document.getElementById('evSourceFull').style.display = type === 'room' ? 'none' : '';
+  document.getElementById('evSourceRoom').style.display = type === 'room' ? '' : 'none';
+  evaluar();
+}
+
+function evaluar(){
+  const zoneEl = document.getElementById('zone');
+  const zone = zoneEl.value;
+  const m2 = parseFloat(document.getElementById('m2').value) || 0;
+  const precio = parseFloat(document.getElementById('precio').value) || 0;
+  const media = currentType === 'room' ? ROOM_AVG : Math.round(AVG_PER_M2 * m2);
+  const dif = media > 0 ? Math.round(((precio - media) / media) * 100) : 0;
+
+  state = { type: currentType, zone: zone, m2: m2, precio: precio, media: media, dif: dif };
+
+  document.getElementById('valPedido').textContent = fmtEUR(precio);
+  document.getElementById('valMedia').textContent = fmtEUR(media);
+  document.getElementById('valDif').textContent = (dif >= 0 ? '+' : '') + dif + '%';
+
+  const box = document.getElementById('verdictBox');
+  const title = document.getElementById('verdictTitle');
+  const sub = document.getElementById('verdictSub');
+  const dot = box.querySelector('.shutter');
+
+  box.classList.remove('ok','warn','bad');
+  let tier;
+  if(dif <= 10){ tier = 'ok'; dot.style.background = 'var(--green)'; }
+  else if(dif <= 30){ tier = 'warn'; dot.style.background = '#ffb020'; }
+  else { tier = 'bad'; dot.style.background = 'var(--coral)'; }
+  box.classList.add(tier);
+  title.textContent = t('verdict_' + tier);
+  const sizePart = currentType === 'room' ? t('ev_type_room') : m2 + ' m²';
+  sub.textContent = zoneNames[zone] + ' · ' + sizePart + ' · ' + (dif >= 0 ? '+' : '') + dif + '%';
+}
+
+function caseLabel(c){
+  const templates = {
+    es: 'Pedían ' + fmtEUR(c.precio) + ' · media de zona ' + fmtEUR(c.media),
+    it: 'Chiedevano ' + fmtEUR(c.precio) + ' · media zona ' + fmtEUR(c.media),
+    en: 'Asked for ' + fmtEUR(c.precio) + ' · area average ' + fmtEUR(c.media)
+  };
+  return templates[currentLang];
+}
+
+function renderCases(){
+  const list = document.getElementById('casesList');
+  list.innerHTML = '';
+  casesData.forEach(function(c){
+    const dif = Math.round(((c.precio - c.media) / c.media) * 100);
+    const tier = dif <= 10 ? 'ok' : dif <= 30 ? 'warn' : 'bad';
+    const dotColor = tier === 'bad' ? 'var(--coral)' : tier === 'warn' ? '#ffb020' : 'var(--green)';
+    const barWidth = Math.min(Math.max(dif, 0), 60) / 60 * 100;
+    const pctClass = tier === 'ok' ? '' : tier;
+    const row = document.createElement('div');
+    row.className = 'case-row';
+    row.innerHTML =
+      '<span class="shutter" style="background:' + dotColor + ';"></span>' +
+      '<div>' +
+        '<div class="case-zone">' + zoneNames[c.zone] + ' · ' + c.m2 + ' m²</div>' +
+        '<div class="case-detail">' + caseLabel(c) + '</div>' +
+        '<div class="case-bar-track"><div class="case-bar-fill ' + tier + '" style="width:' + barWidth + '%;"></div></div>' +
+      '</div>' +
+      '<div class="case-pct ' + pctClass + '">' + (dif >= 0 ? '+' : '') + dif + '%</div>';
+    list.appendChild(row);
+  });
+}
+
+function buildMessage(){
+  const zona = zoneNames[state.zone];
+  const propuesta = Math.round(((state.precio + state.media) / 2) / 10) * 10;
+  const unit = {
+    es: state.type === 'room' ? 'una habitación en piso compartido' : 'una vivienda de ' + state.m2 + ' m²',
+    it: state.type === 'room' ? 'una stanza in un appartamento condiviso' : 'un\'abitazione di ' + state.m2 + ' m²',
+    en: state.type === 'room' ? 'a room in a shared flat' : 'a ' + state.m2 + ' m² home'
+  };
+  const templates = {
+    es: state.dif > 0
+      ? 'Hola,\n\nHe revisado los precios de referencia de ' + zona + ' y el precio pedido (' + fmtEUR(state.precio) + '/mes) está un ' + state.dif + '% por encima de la media estimada para ' + unit.es + ' en la zona (' + fmtEUR(state.media) + '/mes aprox.).\n\nMe gustaría proponer ' + fmtEUR(propuesta) + '/mes, más ajustado a la media de la zona. Quedo abierto/a a hablarlo.\n\nGracias.'
+      : 'Hola,\n\nGracias por la información. Según los datos de referencia de ' + zona + ', el precio pedido (' + fmtEUR(state.precio) + '/mes) ya está en línea con la media estimada de la zona (' + fmtEUR(state.media) + '/mes aprox.), así que no tengo ninguna objeción sobre el precio.\n\nUn saludo.',
+    it: state.dif > 0
+      ? 'Ciao,\n\nHo controllato i prezzi di riferimento per ' + zona + ' e il prezzo richiesto (' + fmtEUR(state.precio) + '/mese) è superiore del ' + state.dif + '% rispetto alla media stimata per ' + unit.it + ' nella zona (circa ' + fmtEUR(state.media) + '/mese).\n\nVorrei proporre ' + fmtEUR(propuesta) + '/mese, più vicino alla media della zona. Sono disponibile a parlarne.\n\nGrazie.'
+      : 'Ciao,\n\nGrazie per l\'informazione. In base ai dati di riferimento per ' + zona + ', il prezzo richiesto (' + fmtEUR(state.precio) + '/mese) è già in linea con la media stimata della zona (circa ' + fmtEUR(state.media) + '/mese), quindi non ho obiezioni sul prezzo.\n\nSaluti.',
+    en: state.dif > 0
+      ? 'Hi,\n\nI checked the reference prices for ' + zona + ' and the asking price (' + fmtEUR(state.precio) + '/month) is ' + state.dif + '% above the estimated average for ' + unit.en + ' in the area (approx. ' + fmtEUR(state.media) + '/month).\n\nI\'d like to propose ' + fmtEUR(propuesta) + '/month, closer to the area average. I\'m open to discussing it.\n\nThanks.'
+      : 'Hi,\n\nThanks for the info. Based on the reference data for ' + zona + ', the asking price (' + fmtEUR(state.precio) + '/month) is already in line with the area\'s estimated average (approx. ' + fmtEUR(state.media) + '/month), so I have no objection to the price.\n\nBest.'
+  };
+  return templates[currentLang];
+}
+
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+}
+
+function abrirMensaje(){
+  const body = document.getElementById('msgBody');
+  const copyBtn = document.getElementById('msgCopyBtn');
+  if(!state.precio){
+    body.textContent = t('msg_intro_needdata');
+    copyBtn.style.display = 'none';
+  } else {
+    body.textContent = buildMessage();
+    copyBtn.style.display = 'inline-flex';
+    copyBtn.textContent = t('msg_copy');
+  }
+  openModal('modalMensaje');
+}
+
+function copiarMensaje(){
+  const text = document.getElementById('msgBody').textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    const btn = document.getElementById('msgCopyBtn');
+    btn.textContent = t('msg_copied');
+    setTimeout(function(){ btn.textContent = t('msg_copy'); }, 1800);
+  });
+}
+
+function abrirAsociaciones(){
+  openModal('modalAsociaciones');
+}
+
+const CABILDO_EMAIL = 'atencioninformacionciudadana@cabildodelanzarote.com';
+
+function updateSignMailto(){
+  const btn = document.getElementById('signMailtoBtn');
+  if(!btn) return;
+  const subject = encodeURIComponent(t('sign_subject'));
+  const body = encodeURIComponent(t('sign_email_body'));
+  btn.href = 'mailto:' + CABILDO_EMAIL + '?subject=' + subject + '&body=' + body;
+}
+
+function abrirFirmar(){
+  updateSignMailto();
+  openModal('modalFirmar');
+}
+
+document.querySelectorAll('#langSwitch button').forEach(function(btn){
+  btn.addEventListener('click', function(){ setLang(btn.dataset.lang); });
+});
+document.querySelectorAll('#typeSwitch .type-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){ setType(btn.dataset.type); });
+});
+document.querySelectorAll('.modal-overlay').forEach(function(overlay){
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) overlay.classList.remove('open');
+  });
+});
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.modal-overlay.open').forEach(function(m){ m.classList.remove('open'); });
+  }
+});
+
+applyI18n();
+renderCases();
+evaluar();
+</script>
+
+</body>
+</html>
