@@ -16,7 +16,6 @@ type Props = {
 export function SiteHeader({ lang, t, cta }: Props) {
   const pathname = usePathname()
   const rest = pathname.split('/').slice(2).join('/')
-  const onObs = rest.startsWith('observatorio')
 
   function setLangCookie(l: Locale) {
     document.cookie = `lang=${l}; path=/; max-age=31536000; samesite=lax`
@@ -32,11 +31,9 @@ export function SiteHeader({ lang, t, cta }: Props) {
           </span>
         </Link>
         <nav className="links" aria-label="Principal">
+          <Link href={`/${lang}#mapa`}>{t.observatorio}</Link>
           <Link href={`/${lang}#evaluar`}>{t.evaluar}</Link>
           <Link href={`/${lang}#contexto`}>{t.contexto}</Link>
-          <Link href={`/${lang}/observatorio`} aria-current={onObs ? 'page' : undefined}>
-            {t.observatorio}
-          </Link>
           <Link href={`/${lang}#actuar`}>{t.actuar}</Link>
         </nav>
         <div className="nav-right">

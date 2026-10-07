@@ -38,8 +38,8 @@ export async function POST(req: Request) {
     'line_items[0][price_data][product_data][name]': `CasaJusta Lanzarote · ${title}`,
     'metadata[goal_id]': String(goal.id),
     'metadata[period]': monthToDate(month),
-    success_url: `${site}/${lang}/observatorio?aporte=ok#apoya`,
-    cancel_url: `${site}/${lang}/observatorio?aporte=cancel#apoya`,
+    success_url: `${site}/${lang}?aporte=ok#apoya`,
+    cancel_url: `${site}/${lang}?aporte=cancel#apoya`,
   })
 
   const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {

@@ -65,7 +65,7 @@ export function Evaluator({ lang, t, tipoNames, refs }: Props) {
     }
     // Si el formulario ya está en esta página (observatorio), lo rellena al momento.
     window.dispatchEvent(new Event(PREFILL_EVENT))
-    router.push(`/${lang}/observatorio#caso`)
+    router.push(`/${lang}#caso`)
   }
 
   // Cualquier cambio invalida el cálculo mostrado hasta volver a calcular.
