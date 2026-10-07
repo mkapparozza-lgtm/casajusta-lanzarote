@@ -26,8 +26,11 @@ El usuario habla italiano: explicarle todo en italiano.
   build de Turbopack 16.4 en esta ruta con espacios).
 
 ## Estructura
-- `app/[lang]/page.tsx` — home: hero, evaluador, contexto legal, teaser del observatorio, acciones (3 modales).
-- `app/[lang]/observatorio/` — observatorio + formulario "Añade tu caso" (server action) + "Haz oír nuestra voz".
+- `app/[lang]/page.tsx` — HOME = OBSERVATORIO (desde 7-oct-2026, la home vieja parecía igual al sitio antiguo):
+  frase dinámica + cifras + mapa + termómetro + gráfico, evaluador, "Añade tu caso", contexto legal (5 tarjetas),
+  acciones (3 modales, con el lema del hero), sección de apoyo (oculta), metodología.
+- `app/[lang]/observatorio/` — solo redirige 308 a `/[lang]` (enlaces viejos) y contiene la server action del formulario.
+  Las claves `hero.*` (salvo h1), `stats.*`, `how.*` y `teaser.*` de los diccionarios ya no se usan.
 - `app/[lang]/admin/` — panel protegido (ADMIN_PASSWORD + cookie firmada HMAC).
 - `app/[lang]/privacidad`, `aviso-legal` — textos legales; datos del titular en `lib/site.ts`.
 - `app/api/donate` (Stripe Checkout), `app/api/stripe/webhook`.
