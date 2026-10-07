@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { isLocale } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
-import { getObservatoryData } from '@/lib/server/observatory'
+import { getCommunityRefs, getObservatoryData } from '@/lib/server/observatory'
+import { EvalStateProvider } from '@/components/home/EvalState'
+import { Evaluator } from '@/components/home/Evaluator'
 import { getSupportData, supportSectionEnabled } from '@/lib/server/support'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SeedBanner } from '@/components/SeedBanner'
@@ -36,8 +38,9 @@ export default async function ObservatorioPage({ params, searchParams }: PagePro
   // Al cliente solo llegan agregados ya filtrados por el umbral de 5 casos.
   // La sección de apoyo está apagada por defecto (SHOW_SUPPORT_SECTION): no se consulta ni se muestra.
   const showSupport = supportSectionEnabled()
-  const [{ data, hasSeed }, support] = await Promise.all([
+  const [{ data, hasSeed }, { refs }, support] = await Promise.all([
     getObservatoryData(),
+    getCommunityRefs(),
     showSupport ? getSupportData() : Promise.resolve(null),
   ])
 
@@ -60,6 +63,27 @@ export default async function ObservatorioPage({ params, searchParams }: PagePro
       />
       <main id="main" className="wrap">
         <Observatory lang={lang} t={t} data={data} />
+
+        {/* Mismo evaluador que en la home: al terminar, "Sí, añadir mi caso" rellena el formulario de abajo. */}
+        <section className="block" id="evaluar" aria-label={t.ev.eyebrow}>
+          <EvalStateProvider>
+            <div className="evaluator">
+              <div className="section-head">
+                <div className="eyebrow">
+                  <span className="shutter" aria-hidden="true" />
+                  <span>{t.ev.eyebrow}</span>
+                </div>
+                <h2>{t.ev.h2}</h2>
+                <p>{t.ev.p}</p>
+                <p className="ev-anon">
+                  <span className="shutter" style={{ width: 14, height: 9, background: 'var(--green)' }} aria-hidden="true" />
+                  <span>{t.ev.anon}</span>
+                </p>
+              </div>
+              <Evaluator lang={lang} t={t.ev} tipoNames={t.tipo} refs={refs} />
+            </div>
+          </EvalStateProvider>
+        </section>
 
         <section className="block" id="caso" aria-labelledby="caso-h2">
           <h2 id="caso-h2">{t.form.h2}</h2>

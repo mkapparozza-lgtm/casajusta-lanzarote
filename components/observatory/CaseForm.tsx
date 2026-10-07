@@ -17,7 +17,7 @@ import {
 } from '@/lib/domain'
 import { fill, type Dict } from '@/lib/i18n'
 import { submitCase, type CaseErrorCode, type CaseResult } from '@/app/[lang]/observatorio/actions'
-import { PREFILL_KEY, type Prefill } from '@/components/home/EvalState'
+import { PREFILL_EVENT, PREFILL_KEY, type Prefill } from '@/components/home/EvalState'
 import { Turnstile } from './Turnstile'
 
 type Props = { lang: Locale; t: Dict['form']; abuses: Dict['abuses']; tipoNames: Dict['tipo'] }
@@ -39,21 +39,27 @@ export function CaseForm({ lang, t, abuses, tipoNames }: Props) {
   const [resetKey, setResetKey] = useState(0)
   const handled = useRef<CaseResult>(null)
 
-  // Datos que llegan del evaluador (sessionStorage, nunca por la URL).
+  // Datos que llegan del evaluador (sessionStorage, nunca por la URL): al cargar la página
+  // y también cuando el evaluador está en la misma página y avisa con PREFILL_EVENT.
   useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem(PREFILL_KEY)
-      if (!raw) return
-      sessionStorage.removeItem(PREFILL_KEY)
-      const p = JSON.parse(raw) as Partial<Prefill>
-      if (isMunicipio(p.municipio)) setMunicipio(p.municipio)
-      if (p.tipo === 'vivienda' || p.tipo === 'habitacion') setTipo(p.tipo)
-      if (typeof p.m2 === 'number') setM2(String(p.m2))
-      if (typeof p.price === 'number') setPrice(String(p.price))
-      setPrefilled(true)
-    } catch {
-      /* sin prefill */
+    function applyPrefill() {
+      try {
+        const raw = sessionStorage.getItem(PREFILL_KEY)
+        if (!raw) return
+        sessionStorage.removeItem(PREFILL_KEY)
+        const p = JSON.parse(raw) as Partial<Prefill>
+        if (isMunicipio(p.municipio)) setMunicipio(p.municipio)
+        if (p.tipo === 'vivienda' || p.tipo === 'habitacion') setTipo(p.tipo)
+        setM2(typeof p.m2 === 'number' ? String(p.m2) : '')
+        if (typeof p.price === 'number') setPrice(String(p.price))
+        setPrefilled(true)
+      } catch {
+        /* sin prefill */
+      }
     }
+    applyPrefill()
+    window.addEventListener(PREFILL_EVENT, applyPrefill)
+    return () => window.removeEventListener(PREFILL_EVENT, applyPrefill)
   }, [])
 
   // Tras un envío correcto se vacía el formulario (se conserva el municipio).

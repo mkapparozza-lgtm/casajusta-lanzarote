@@ -6,7 +6,7 @@ import { LIMITS, MUNICIPIOS, municipioName, type Locale, type MunicipioId, type 
 import { eur } from '@/lib/format'
 import { fill, type Dict } from '@/lib/i18n'
 import type { CommunityRefs } from '@/lib/server/observatory'
-import { PREFILL_KEY, useEvalState, type Prefill } from './EvalState'
+import { PREFILL_EVENT, PREFILL_KEY, useEvalState, type Prefill } from './EvalState'
 
 // Referencias oficiales, solo cuando el municipio no tiene 5 contratos en el observatorio.
 // Media provincial de Las Palmas (OBVIA / idealista, abril 2026; verificada julio 2026).
@@ -63,6 +63,8 @@ export function Evaluator({ lang, t, tipoNames, refs }: Props) {
     } catch {
       /* sin almacenamiento: el formulario se abre vacío */
     }
+    // Si el formulario ya está en esta página (observatorio), lo rellena al momento.
+    window.dispatchEvent(new Event(PREFILL_EVENT))
     router.push(`/${lang}/observatorio#caso`)
   }
 

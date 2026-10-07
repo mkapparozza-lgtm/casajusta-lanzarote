@@ -28,4 +28,6 @@ export function useEvalState() {
 
 /** Clave de sessionStorage para pasar datos del evaluador al formulario del observatorio sin ponerlos en la URL. */
 export const PREFILL_KEY = 'cj_prefill'
+/** Evento para avisar al formulario cuando evaluador y formulario están en la misma página (observatorio). */
+export const PREFILL_EVENT = 'cj-prefill'
 export type Prefill = { municipio: MunicipioId; tipo: Tipo; m2: number | null; price: number }
