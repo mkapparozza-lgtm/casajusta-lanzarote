@@ -63,6 +63,12 @@ El usuario habla italiano: explicarle todo en italiano.
 - Deploy: si un push a master NO dispara el deploy en Vercel (pasó el 9-oct), publicar con `npx vercel --prod --yes`
   desde esta carpeta (proyecto `casajusta-lanzarote`, comprobar `.vercel/project.json`).
 
+## Cookies y Google Analytics (10-oct-2026, decisión del usuario)
+- `components/CookieConsent.tsx`: GA4 (`NEXT_PUBLIC_GA_ID`) se carga SOLO tras "Aceptar". Rechazar al mismo nivel
+  (AEPD). Cookie técnica `cj_consent` (6 meses). Enlace "Cookies" en el pie para cambiar; al rechazar se borran _ga*.
+- Sin `NEXT_PUBLIC_GA_ID` no hay banner ni Analytics. Política en privacidad, sección `#cookies` (3 idiomas).
+- Nunca enviar a GA datos de los casos ni eventos del formulario.
+
 ## Datos oficiales por municipio (SERPAVI, añadido 9-oct-2026)
 - `lib/official.ts` (GENERADO desde el Excel oficial del Ministerio de Vivienda, datos fiscales 2024): mediana
   €/m² de pisos (vivienda colectiva), alquiler mensual, superficie, nº de pisos declarados, y 2019 para la variación.
