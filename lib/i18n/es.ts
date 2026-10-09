@@ -61,7 +61,7 @@ export const es = {
     btn: 'Calcular valoración',
     sourceCommunity: 'Basado en {n} casos reales de {municipio}, últimos 6 meses (mediana de contratos).',
     sourceFull:
-      'Todavía no hay 5 contratos de {municipio} en el observatorio, así que usamos la referencia oficial: 15,56 €/m²/mes, media de la provincia de Las Palmas, OBVIA / idealista, abril 2026. Última verificación: julio 2026. No existe índice oficial desglosado por municipio en Lanzarote.',
+      'Todavía no hay 5 contratos de {municipio} en el observatorio, así que usamos la referencia oficial: 15,56 €/m²/mes, media de los anuncios en la provincia de Las Palmas, OBVIA / idealista, abril 2026. Usamos precios de anuncios porque se comparan con lo que se pide hoy.',
     sourceRoom:
       'Todavía no hay 5 contratos de habitación en {municipio} en el observatorio, así que usamos la referencia oficial: 509 €/mes de media por habitación en piso compartido en Lanzarote, informe de Drago Canarias, mayo 2025. Los precios reales pueden haber subido desde entonces.',
     placeholderTitle: 'Introduce tus datos',
@@ -74,6 +74,7 @@ export const es = {
     verdictBad: 'Fuera de control',
     invalid: 'Revisa los datos: metros entre 15 y 400 y precio entre 100 y 6.000 €.',
     optinQ: '¿Quieres que tu caso cuente en el observatorio? Es anónimo.',
+    officialInfo: 'Dato oficial: según Hacienda, en {year} los pisos alquilados en {municipio} pagaban de mediana {eurM2} ({rent} al mes). Incluye contratos antiguos, así que lo nuevo suele ser más caro.',
     optinYes: 'Sí, añadir mi caso',
   },
   ctx: {
@@ -189,6 +190,20 @@ export const es = {
     legendPaid: 'Mediana pagada con contrato',
     legendAsked: 'Mediana pedida en anuncios',
     disclaimer: 'Datos aportados de forma anónima por residentes. Son estimaciones agregadas y no constituyen asesoramiento legal ni inmobiliario.',
+    officialTag: 'Hacienda {year}',
+    sOfficial: 'Según Hacienda, en {year} un piso de alquiler en Lanzarote costaba de mediana entre {min} por metro cuadrado en {minPlace} y {max} en {maxPlace}. Con tus casos sabremos cuánto se paga hoy.',
+    sOfficialMuni: 'Según Hacienda, en {year} un piso de alquiler en {place} costaba de mediana {value} por metro cuadrado, unos {rent} al mes. Faltan 5 casos de la comunidad para saber cuánto se paga hoy.',
+    mapOfficialNote: 'Casillas con «Hacienda {year}»: todavía no hay 5 casos de la comunidad, así que mostramos el alquiler mediano de los pisos declarado a Hacienda en {year}. Incluye contratos antiguos: lo que se pide hoy suele ser más alto.',
+    officialH2: 'Lo que dice Hacienda, municipio por municipio',
+    officialLead: 'Alquiler de pisos como vivienda habitual declarado en el IRPF de {year}. Son todos los contratos vigentes, también los firmados hace años: por eso es más bajo que lo que se pide hoy en los anuncios.',
+    colMuni: 'Municipio',
+    colEurM2: '€/m² al mes',
+    colRent: 'Alquiler mensual',
+    colM2: 'Superficie',
+    colContracts: 'Pisos declarados',
+    colChange: 'Desde 2019',
+    province: 'Provincia de Las Palmas',
+    officialSource: 'Fuente: SERPAVI, Ministerio de Vivienda y Agenda Urbana (datos fiscales de {year}, publicados en marzo de 2026). Valores medianos.',
   },
   form: {
     h2: 'Añade tu caso',

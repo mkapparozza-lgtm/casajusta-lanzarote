@@ -60,7 +60,7 @@ export const it: Dict = {
     btn: 'Calcola la valutazione',
     sourceCommunity: 'Basato su {n} casi reali di {municipio}, ultimi 6 mesi (mediana dei contratti).',
     sourceFull:
-      "Non ci sono ancora 5 contratti di {municipio} nell'osservatorio, quindi usiamo il riferimento ufficiale: 15,56 €/m²/mese, media della provincia di Las Palmas, OBVIA / idealista, aprile 2026. Ultima verifica: luglio 2026. Non esiste un indice ufficiale per comune a Lanzarote.",
+      "Non ci sono ancora 5 contratti di {municipio} nell'osservatorio, quindi usiamo il riferimento ufficiale: 15,56 €/m²/mese, media degli annunci nella provincia di Las Palmas, OBVIA / idealista, aprile 2026. Usiamo i prezzi degli annunci perché si confrontano con quanto si chiede oggi.",
     sourceRoom:
       "Non ci sono ancora 5 contratti di stanze a {municipio} nell'osservatorio, quindi usiamo il riferimento ufficiale: 509 €/mese di media per una stanza in appartamento condiviso a Lanzarote, rapporto Drago Canarias, maggio 2025. I prezzi reali potrebbero essere saliti da allora.",
     placeholderTitle: 'Inserisci i tuoi dati',
@@ -73,6 +73,7 @@ export const it: Dict = {
     verdictBad: 'Fuori controllo',
     invalid: 'Controlla i dati: metri tra 15 e 400 e prezzo tra 100 e 6.000 €.',
     optinQ: "Vuoi che il tuo caso conti nell'osservatorio? È anonimo.",
+    officialInfo: 'Dato ufficiale: secondo il fisco spagnolo, nel {year} gli appartamenti in affitto a {municipio} pagavano in mediana {eurM2} ({rent} al mese). Include contratti vecchi, quindi i nuovi di solito costano di più.',
     optinYes: 'Sì, aggiungi il mio caso',
   },
   ctx: {
@@ -188,6 +189,20 @@ export const it: Dict = {
     legendPaid: 'Mediana pagata con contratto',
     legendAsked: 'Mediana richiesta negli annunci',
     disclaimer: 'Dati forniti in forma anonima dai residenti. Sono stime aggregate e non costituiscono consulenza legale o immobiliare.',
+    officialTag: 'Fisco {year}',
+    sOfficial: "Secondo il fisco spagnolo, nel {year} un appartamento in affitto a Lanzarote costava in mediana tra {min} al metro quadrato a {minPlace} e {max} a {maxPlace}. Con i vostri casi sapremo quanto si paga oggi.",
+    sOfficialMuni: 'Secondo il fisco spagnolo, nel {year} un appartamento in affitto a {place} costava in mediana {value} al metro quadrato, circa {rent} al mese. Mancano 5 casi della comunità per sapere quanto si paga oggi.',
+    mapOfficialNote: 'Caselle con «Fisco {year}»: non ci sono ancora 5 casi della comunità, quindi mostriamo l\'affitto mediano degli appartamenti dichiarato al fisco nel {year}. Include contratti vecchi: quello che si chiede oggi di solito è più alto.',
+    officialH2: 'Cosa dice il fisco, comune per comune',
+    officialLead: "Affitti di appartamenti come abitazione abituale dichiarati nella dichiarazione dei redditi del {year}. Sono tutti i contratti in corso, anche quelli firmati anni fa: per questo sono più bassi di quanto si chiede oggi negli annunci.",
+    colMuni: 'Comune',
+    colEurM2: '€/m² al mese',
+    colRent: 'Affitto mensile',
+    colM2: 'Superficie',
+    colContracts: 'Appartamenti dichiarati',
+    colChange: 'Dal 2019',
+    province: 'Provincia di Las Palmas',
+    officialSource: 'Fonte: SERPAVI, Ministerio de Vivienda y Agenda Urbana (dati fiscali {year}, pubblicati a marzo 2026). Valori mediani.',
   },
   form: {
     h2: 'Aggiungi il tuo caso',

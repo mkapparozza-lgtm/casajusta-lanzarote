@@ -3,7 +3,8 @@
 import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { LIMITS, MUNICIPIOS, municipioName, type Locale, type MunicipioId, type Tipo } from '@/lib/domain'
-import { eur } from '@/lib/format'
+import { eur, perM2 } from '@/lib/format'
+import { OFFICIAL, OFFICIAL_YEAR } from '@/lib/official'
 import { fill, type Dict } from '@/lib/i18n'
 import type { CommunityRefs } from '@/lib/server/observatory'
 import { PREFILL_EVENT, PREFILL_KEY, useEvalState, type Prefill } from './EvalState'
@@ -154,6 +155,17 @@ export function Evaluator({ lang, t, tipoNames, refs }: Props) {
           </p>
         )}
         <p className={`ev-source${community ? ' community' : ''}`}>{source}</p>
+        {/* Solo informativo: SERPAVI incluye contratos antiguos, no sirve como veredicto para un precio nuevo. */}
+        {tipo === 'vivienda' && (
+          <p className="ev-source">
+            {fill(t.officialInfo, {
+              year: OFFICIAL_YEAR,
+              municipio: municipioName(municipio),
+              eurM2: perM2(OFFICIAL[municipio].eurM2, lang),
+              rent: eur(OFFICIAL[municipio].rent, lang),
+            })}
+          </p>
+        )}
       </form>
 
       <div className="ev-result" aria-live="polite">

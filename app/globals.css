@@ -936,6 +936,11 @@ section.block {
   font-size: 12px;
   opacity: 0.8;
 }
+/* Dato oficial de Hacienda (aún sin 5 casos de la comunidad) */
+.tile.official .t-n {
+  font-style: italic;
+  opacity: 0.9;
+}
 .tile.few {
   background: transparent;
   border-style: dashed;
@@ -1348,8 +1353,15 @@ td {
   border-bottom: 1px solid var(--line);
   vertical-align: top;
 }
+tbody th {
+  font-size: 15px;
+  color: var(--ink);
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
 td + td,
-th + th {
+th + th,
+th + td {
   padding-left: 16px;
 }
 .r {

@@ -55,6 +55,15 @@ El usuario habla italiano: explicarle todo en italiano.
   (obligatorio en producción), detección de picos → `status='review'` (no cuenta hasta que admin publique).
   El mensaje al usuario no revela si su caso fue a revisión.
 
+## Datos oficiales por municipio (SERPAVI, añadido 9-oct-2026)
+- `lib/official.ts` (GENERADO desde el Excel oficial del Ministerio de Vivienda, datos fiscales 2024): mediana
+  €/m² de pisos (vivienda colectiva), alquiler mensual, superficie, nº de pisos declarados, y 2019 para la variación.
+- Es un STOCK (todos los contratos vigentes, también antiguos): mucho más bajo que los anuncios (provincia 7,6 vs
+  15,56 €/m² en idealista). Por eso: se muestra en el mapa ("Hacienda 2024") SOLO en la métrica €/m² y SOLO donde la
+  comunidad no tiene 5 casos; en la frase titular cuando no hay casos; en una tabla "Lo que dice Hacienda"; y en el
+  evaluador como línea informativa. NUNCA como veredicto del evaluador.
+- Actualizar cada año cuando el Ministerio publique datos nuevos (normalmente en primavera).
+
 ## Evaluador
 - Si el municipio tiene ≥5 contratos (`source='pagado'`) en los últimos 6 meses: mediana de la comunidad
   ("Basado en N casos reales de X"). Si no: referencia oficial, declarada en pantalla:

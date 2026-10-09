@@ -1,7 +1,17 @@
 // Frase titular del observatorio, generada a partir de los agregados (nunca de casos sueltos).
 
-import { ABUSE_IDS, INTL_LOCALE, WINDOW_MONTHS, type AbuseId, type Locale } from './domain'
-import { dec1, pct } from './format'
+import {
+  ABUSE_IDS,
+  INTL_LOCALE,
+  MUNICIPIO_IDS,
+  WINDOW_MONTHS,
+  municipioName,
+  type AbuseId,
+  type Locale,
+  type MunicipioId,
+} from './domain'
+import { dec1, eur, pct } from './format'
+import { OFFICIAL, OFFICIAL_YEAR } from './official'
 import { capitalize, fill, type Dict } from './i18n'
 import { addMonths, monthLabel, type MonthKey } from './months'
 import type { ScopeStats } from './stats'
@@ -21,17 +31,41 @@ export function topAbuse(s: ScopeStats): { id: AbuseId; share: number } | null {
   return best ? { id: best, share: s.abuseCounts[best] / s.n } : null
 }
 
+/** Frase con el dato oficial de Hacienda (SERPAVI) cuando aún no hay 5 casos de la comunidad. */
+function officialHeadline(dict: Dict, locale: Locale, scope: MunicipioId | null): string {
+  const euro = (v: number) => `${dec1(v, locale)} €`
+  if (scope) {
+    const o = OFFICIAL[scope]
+    return fill(dict.obs.sOfficialMuni, {
+      year: OFFICIAL_YEAR,
+      place: municipioName(scope),
+      value: euro(o.eurM2),
+      rent: eur(o.rent, locale),
+    })
+  }
+  const sorted = MUNICIPIO_IDS.map((id) => ({ id, v: OFFICIAL[id].eurM2 })).sort((a, b) => a.v - b.v)
+  const min = sorted[0]!
+  const max = sorted[sorted.length - 1]!
+  return fill(dict.obs.sOfficial, {
+    year: OFFICIAL_YEAR,
+    min: euro(min.v),
+    minPlace: municipioName(min.id),
+    max: euro(max.v),
+    maxPlace: municipioName(max.id),
+  })
+}
+
 export function headline(
   dict: Dict,
   locale: Locale,
   s: ScopeStats,
   end: MonthKey,
   place: string,
-  isIsland: boolean,
+  scope: MunicipioId | null,
 ): string {
   const window = windowText(dict, locale, end)
   const Window = capitalize(window)
-  if (s.n === null) return isIsland ? fill(dict.obs.sEmpty, { window }) : fill(dict.obs.sFew, { place, window })
+  if (s.n === null) return officialHeadline(dict, locale, scope)
 
   const top = topAbuse(s)
   // Solo si al menos 1 de cada 10 casos lo señala.

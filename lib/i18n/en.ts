@@ -60,7 +60,7 @@ export const en: Dict = {
     btn: 'Calculate assessment',
     sourceCommunity: 'Based on {n} real cases from {municipio}, last 6 months (median of contracts).',
     sourceFull:
-      "There aren't 5 contracts from {municipio} in the observatory yet, so we use the official reference: €15.56/m²/month, Las Palmas province average, OBVIA / idealista, April 2026. Last checked: July 2026. No official municipality-level index exists for Lanzarote.",
+      "There aren't 5 contracts from {municipio} in the observatory yet, so we use the official reference: €15.56/m²/month, Las Palmas province listings average, OBVIA / idealista, April 2026. We use listing prices because they compare with what is being asked today.",
     sourceRoom:
       "There aren't 5 room contracts from {municipio} in the observatory yet, so we use the official reference: €509/month average for a room in a shared flat in Lanzarote, Drago Canarias report, May 2025. Real prices may have risen since then.",
     placeholderTitle: 'Enter your details',
@@ -73,6 +73,7 @@ export const en: Dict = {
     verdictBad: 'Out of control',
     invalid: 'Check your details: 15 to 400 m² and a price between €100 and €6,000.',
     optinQ: 'Do you want your case to count in the observatory? It is anonymous.',
+    officialInfo: 'Official data: according to the Spanish tax agency, in {year} rented flats in {municipio} paid a median of {eurM2} ({rent} a month). It includes older contracts, so new ones are usually more expensive.',
     optinYes: 'Yes, add my case',
   },
   ctx: {
@@ -188,6 +189,20 @@ export const en: Dict = {
     legendPaid: 'Median paid with a contract',
     legendAsked: 'Median asked in listings',
     disclaimer: 'Data shared anonymously by residents. These are aggregated estimates and do not constitute legal or real-estate advice.',
+    officialTag: 'Tax data {year}',
+    sOfficial: 'According to the Spanish tax agency, in {year} a rented flat in Lanzarote cost a median of between {min} per square metre in {minPlace} and {max} in {maxPlace}. Your cases will show what people pay today.',
+    sOfficialMuni: "According to the Spanish tax agency, in {year} a rented flat in {place} cost a median of {value} per square metre, about {rent} a month. It needs 5 community cases to show what people pay today.",
+    mapOfficialNote: 'Tiles marked «Tax data {year}»: there are not 5 community cases yet, so we show the median rent of flats declared to the tax agency in {year}. It includes older contracts: asking prices today are usually higher.',
+    officialH2: 'What the tax data says, municipality by municipality',
+    officialLead: 'Rents of flats used as a primary home, declared in {year} income tax returns. It covers every contract in force, including ones signed years ago — that is why it is lower than what listings ask for today.',
+    colMuni: 'Municipality',
+    colEurM2: '€/m² per month',
+    colRent: 'Monthly rent',
+    colM2: 'Size',
+    colContracts: 'Flats declared',
+    colChange: 'Since 2019',
+    province: 'Province of Las Palmas',
+    officialSource: 'Source: SERPAVI, Spanish Ministry of Housing and Urban Agenda (tax data for {year}, published March 2026). Median values.',
   },
   form: {
     h2: 'Add your case',
