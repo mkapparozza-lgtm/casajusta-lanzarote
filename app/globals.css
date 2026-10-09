@@ -1449,6 +1449,72 @@ td.out {
   margin-top: 12px;
 }
 
+/* ---------- banner de cookies ---------- */
+.cookie-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 120;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.cookie-inner {
+  pointer-events: auto;
+  max-width: 760px;
+  width: 100%;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+}
+.cookie-title {
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+.cookie-text {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+.cookie-text a {
+  color: var(--blue);
+}
+/* Aceptar y Rechazar con el mismo peso visual (criterio AEPD) */
+.cookie-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.cookie-actions .btn {
+  min-width: 110px;
+}
+.link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: inherit;
+}
+@media (max-width: 620px) {
+  .cookie-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cookie-actions .btn {
+    flex: 1;
+  }
+}
+
 /* ---------- admin ---------- */
 .admin {
   padding: 32px 0 64px;

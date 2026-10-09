@@ -141,7 +141,15 @@ export const en: Dict = {
     signEmailBody:
       "Dear Cabildo de Lanzarote,\n\nI'm joining the citizen petition led by CasaJusta Lanzarote asking you to review the decision not to declare the island a stressed residential market area, and to take effective action on rental prices.\n\nHundreds of residents cannot access decent housing at reasonable prices. I ask that this issue be treated with the urgency it deserves.\n\nThank you for your attention.",
   },
+  cookies: {
+    title: 'Statistics cookies',
+    text: 'If you accept, we use Google Analytics to know how many people visit the site and where they come from. It does not affect the anonymity of your case. If you reject, the site works just the same.',
+    accept: 'Accept',
+    reject: 'Reject',
+    policy: 'More information',
+  },
   footer: {
+    cookies: 'Cookies',
     project: 'Independent community project, with no sponsors.',
     donations: 'CasaJusta Lanzarote is a citizen project, not an association.',
     disclaimer: 'Data are aggregated estimates and do not constitute legal or real-estate advice.',
@@ -359,7 +367,17 @@ export const en: Dict = {
       {
         h: 'Anti-bot verification',
         p: [
-          'We use Cloudflare Turnstile to check that a person is submitting. Cloudflare processes technical data from your browser for that check under its own privacy policy. We do not use advertising or tracking cookies.',
+          'We use Cloudflare Turnstile to check that a person is submitting. Cloudflare processes technical data from your browser for that check under its own privacy policy.',
+        ],
+      },
+      {
+        id: 'cookies',
+        h: 'Cookies and visit statistics',
+        p: [
+          'Technical cookie: cj_consent remembers for 6 months whether you accepted or rejected statistics cookies. It is needed to respect your choice.',
+          'Statistics cookies (only if you click «Accept»): Google Analytics 4, by Google Ireland Ltd., sets the _ga and _ga_* cookies (up to 2 years) to count visits, page views, approximate country, device and where you came from. Google may process this data outside the EU under the EU-US Data Privacy Framework. We do not use advertising cookies or share data for advertising.',
+          'If you do not accept, Google Analytics is not loaded and none of its cookies are set. You can change your mind at any time from the «Cookies» link at the bottom of every page: if you reject, we delete the Analytics cookies.',
+          'The cases you add to the observatory are never sent to Google Analytics.',
         ],
       },
       {

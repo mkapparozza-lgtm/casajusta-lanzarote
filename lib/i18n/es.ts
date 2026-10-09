@@ -142,7 +142,15 @@ export const es = {
     signEmailBody:
       'Estimado Cabildo de Lanzarote,\n\nMe sumo a la petición ciudadana impulsada por CasaJusta Lanzarote para pedir que se revise la decisión de no declarar la isla zona de mercado residencial tensionado, y que se tomen medidas efectivas frente al precio del alquiler.\n\nCientos de residentes no pueden acceder a una vivienda digna a precios razonables. Pido que este tema se trate con la urgencia que merece.\n\nGracias por su atención.',
   },
+  cookies: {
+    title: 'Cookies de estadística',
+    text: 'Si aceptas, usamos Google Analytics para saber cuántas personas visitan la web y desde dónde llegan. No afecta al anonimato de tu caso. Si rechazas, la web funciona igual.',
+    accept: 'Aceptar',
+    reject: 'Rechazar',
+    policy: 'Más información',
+  },
   footer: {
+    cookies: 'Cookies',
     project: 'Proyecto comunitario e independiente, sin patrocinadores.',
     donations: 'CasaJusta Lanzarote es un proyecto ciudadano, no una asociación.',
     disclaimer: 'Los datos son estimaciones agregadas y no constituyen asesoramiento legal ni inmobiliario.',
@@ -360,7 +368,17 @@ export const es = {
       {
         h: 'Verificación anti-bots',
         p: [
-          'Usamos Cloudflare Turnstile para comprobar que el envío lo hace una persona. Cloudflare procesa datos técnicos de tu navegador para esa comprobación según su propia política de privacidad. No usamos cookies publicitarias ni de seguimiento.',
+          'Usamos Cloudflare Turnstile para comprobar que el envío lo hace una persona. Cloudflare procesa datos técnicos de tu navegador para esa comprobación según su propia política de privacidad.',
+        ],
+      },
+      {
+        id: 'cookies',
+        h: 'Cookies y estadísticas de visitas',
+        p: [
+          'Cookie técnica: cj_consent guarda durante 6 meses si aceptas o rechazas las cookies de estadística. Es necesaria para respetar tu elección.',
+          'Cookies de estadística (solo si pulsas «Aceptar»): Google Analytics 4, de Google Ireland Ltd., instala las cookies _ga y _ga_* (hasta 2 años) para contar visitas, páginas vistas, país aproximado, dispositivo y desde dónde llegas. Google puede tratar estos datos fuera de la UE con las garantías del Marco de Privacidad de Datos UE-EE. UU. No usamos cookies publicitarias ni compartimos datos para publicidad.',
+          'Si no aceptas, no se carga Google Analytics y no se instala ninguna de sus cookies. Puedes cambiar de opinión cuando quieras desde el enlace «Cookies» al pie de cada página: al rechazar, borramos las cookies de Analytics.',
+          'Los casos que añades al observatorio nunca se envían a Google Analytics.',
         ],
       },
       {

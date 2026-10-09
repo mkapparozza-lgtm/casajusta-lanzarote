@@ -141,7 +141,15 @@ export const it: Dict = {
     signEmailBody:
       "Gentile Cabildo di Lanzarote,\n\nMi unisco alla petizione cittadina promossa da CasaJusta Lanzarote per chiedere di rivedere la decisione di non dichiarare l'isola zona di mercato residenziale teso, e di adottare misure efficaci sul prezzo degli affitti.\n\nCentinaia di residenti non possono accedere a un alloggio dignitoso a prezzi ragionevoli. Chiedo che questo tema venga trattato con l'urgenza che merita.\n\nGrazie per l'attenzione.",
   },
+  cookies: {
+    title: 'Cookie statistici',
+    text: "Se accetti, usiamo Google Analytics per sapere quante persone visitano il sito e da dove arrivano. Non tocca l'anonimato del tuo caso. Se rifiuti, il sito funziona allo stesso modo.",
+    accept: 'Accetta',
+    reject: 'Rifiuta',
+    policy: 'Maggiori informazioni',
+  },
   footer: {
+    cookies: 'Cookie',
     project: 'Progetto comunitario e indipendente, senza sponsor.',
     donations: "CasaJusta Lanzarote è un progetto di cittadini, non un'associazione.",
     disclaimer: 'I dati sono stime aggregate e non costituiscono consulenza legale o immobiliare.',
@@ -359,7 +367,17 @@ export const it: Dict = {
       {
         h: 'Verifica anti-bot',
         p: [
-          "Usiamo Cloudflare Turnstile per verificare che l'invio sia fatto da una persona. Cloudflare tratta dati tecnici del tuo browser per questa verifica secondo la propria informativa. Non usiamo cookie pubblicitari né di tracciamento.",
+          "Usiamo Cloudflare Turnstile per verificare che l'invio sia fatto da una persona. Cloudflare tratta dati tecnici del tuo browser per questa verifica secondo la propria informativa.",
+        ],
+      },
+      {
+        id: 'cookies',
+        h: 'Cookie e statistiche delle visite',
+        p: [
+          'Cookie tecnico: cj_consent ricorda per 6 mesi se accetti o rifiuti i cookie statistici. È necessario per rispettare la tua scelta.',
+          'Cookie statistici (solo se clicchi «Accetta»): Google Analytics 4, di Google Ireland Ltd., installa i cookie _ga e _ga_* (fino a 2 anni) per contare visite, pagine viste, paese approssimativo, dispositivo e da dove arrivi. Google può trattare questi dati fuori dall\'UE con le garanzie del Data Privacy Framework UE-USA. Non usiamo cookie pubblicitari né condividiamo dati per la pubblicità.',
+          'Se non accetti, Google Analytics non viene caricato e nessuno dei suoi cookie viene installato. Puoi cambiare idea quando vuoi dal link «Cookie» in fondo a ogni pagina: se rifiuti, cancelliamo i cookie di Analytics.',
+          "I casi che aggiungi all'osservatorio non vengono mai inviati a Google Analytics.",
         ],
       },
       {

@@ -4,6 +4,7 @@ import { LOCALES, isLocale } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
 import { OG_LOCALE, SITE_URL } from '@/lib/site'
 import { SiteFooter } from '@/components/SiteFooter'
+import { CookieConsent } from '@/components/CookieConsent'
 import '../globals.css'
 
 // Fuentes por <link> (como el sitio original): next/font/google falla en el build de Turbopack 16.4 en esta ruta.
@@ -59,6 +60,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
         </a>
         {children}
         <SiteFooter lang={lang} t={t} />
+        <CookieConsent lang={lang} t={t.cookies} />
       </body>
     </html>
   )

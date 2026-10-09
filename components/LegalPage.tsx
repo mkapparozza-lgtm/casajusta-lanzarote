@@ -4,7 +4,7 @@ import { fill, type Dict } from '@/lib/i18n'
 import { LEGAL_HOLDER, LEGAL_UPDATED } from '@/lib/site'
 import { SiteHeader } from './SiteHeader'
 
-type Section = { h: string; p: string[] }
+type Section = { h: string; p: string[]; id?: string }
 
 export function LegalPage({ lang, t, title, sections }: { lang: Locale; t: Dict; title: string; sections: Section[] }) {
   const pending = `[${t.legal.pending}]`
@@ -23,7 +23,7 @@ export function LegalPage({ lang, t, title, sections }: { lang: Locale; t: Dict;
           <p className="meta">{fill(t.legal.updated, { date: shortDate(LEGAL_UPDATED, lang) })}</p>
           {t.legal.translationNote && <p className="meta">{t.legal.translationNote}</p>}
           {sections.map((s) => (
-            <section key={s.h} style={{ padding: 0 }}>
+            <section key={s.h} id={s.id} style={{ padding: 0 }}>
               <h2>{s.h}</h2>
               {s.p.map((p, i) => (
                 <p key={i}>{fill(p, vars)}</p>
