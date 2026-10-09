@@ -2,8 +2,11 @@ import type { Dict } from './es'
 
 export const it: Dict = {
   meta: {
-    title: "CasaJusta Lanzarote — affitti trasparenti per l'isola",
-    desc: 'Valuta se il tuo affitto è equo, confrontalo con i dati reali di Lanzarote e unisciti alla comunità che chiede trasparenza sulla casa.',
+    title: "Prezzo dell'affitto a Lanzarote per comune | CasaJusta",
+    desc: "Paghi troppo d'affitto a Lanzarote? Confronta il tuo prezzo con dati reali per comune, dei residenti e del fisco. Anonimo e gratuito.",
+    ogAlt: "CasaJusta Lanzarote: osservatorio del prezzo dell'affitto per comune",
+    ogLine: "Osservatorio dell'affitto a Lanzarote",
+    ogSub: 'Confronta il tuo affitto con dati reali per comune. Anonimo.',
     obsTitle: "Osservatorio dell'affitto — CasaJusta Lanzarote",
     obsDesc: 'Quanto si paga davvero a Lanzarote, raccontato da chi affitta: prezzi, aumenti al rinnovo e abusi per comune.',
     privacyTitle: 'Privacy — CasaJusta Lanzarote',

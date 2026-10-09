@@ -2,8 +2,11 @@ import type { Dict } from './es'
 
 export const en: Dict = {
   meta: {
-    title: 'CasaJusta Lanzarote — transparent renting for the island',
-    desc: 'Check whether your rent is fair, compare it with real data from Lanzarote, and join the community demanding housing transparency.',
+    title: 'Rent prices in Lanzarote by municipality | CasaJusta',
+    desc: 'Paying too much rent in Lanzarote? Compare your price with real data by municipality, from residents and tax records. Anonymous and free.',
+    ogAlt: 'CasaJusta Lanzarote: rent price observatory by municipality',
+    ogLine: 'Lanzarote rent observatory',
+    ogSub: 'Compare your rent with real data by municipality. Anonymous.',
     obsTitle: 'Rent observatory — CasaJusta Lanzarote',
     obsDesc: 'What people really pay in Lanzarote, told by those who rent: prices, renewal increases and abuses by municipality.',
     privacyTitle: 'Privacy — CasaJusta Lanzarote',

@@ -1,0 +1,17 @@
+# CasaJusta Lanzarote
+
+> Proyecto ciudadano (no es una asociación) sobre el precio del alquiler en Lanzarote (Islas Canarias, España). Observatorio anónimo por municipio con casos aportados por residentes y datos oficiales de Hacienda (SERPAVI, Ministerio de Vivienda), evaluador de alquiler y contexto legal. En español, italiano e inglés.
+
+## Páginas
+- [Observatorio y evaluador (ES)](https://casajustalanzarote.com/es): mediana del alquiler por municipio, subidas al renovar, abusos más señalados, evaluador y formulario anónimo.
+- [Osservatorio (IT)](https://casajustalanzarote.com/it)
+- [Observatory (EN)](https://casajustalanzarote.com/en)
+- [Privacidad](https://casajustalanzarote.com/es/privacidad)
+- [Aviso legal](https://casajustalanzarote.com/es/aviso-legal)
+
+## Metodología
+- Medianas, nunca medias. Ningún dato se publica con menos de 5 casos detrás. Ventanas de 3 meses.
+- Datos oficiales: SERPAVI 2024 (alquiler de vivienda habitual declarado en el IRPF, pisos). Incluye contratos antiguos, por eso es más bajo que los precios de los anuncios.
+- Contexto legal: en Canarias no hay ninguna zona de mercado residencial tensionado declarada; la Ley 6/2025 limita la vivienda vacacional, no el precio del alquiler; la Ley 7/2026 obliga a justificar los contratos de temporada.
+
+Los datos son estimaciones agregadas y no constituyen asesoramiento legal ni inmobiliario.

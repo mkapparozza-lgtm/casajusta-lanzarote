@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
 import { LOCALES, isLocale } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
+import { OG_LOCALE, SITE_URL } from '@/lib/site'
 import { SiteFooter } from '@/components/SiteFooter'
 import '../globals.css'
 
@@ -17,9 +18,20 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
   if (!isLocale(lang)) return {}
   const t = getDict(lang)
   return {
-    metadataBase: new URL(process.env.SITE_URL || 'https://casajustalanzarote.com'),
+    metadataBase: new URL(SITE_URL),
     title: t.meta.title,
     description: t.meta.desc,
+    applicationName: 'CasaJusta Lanzarote',
+    openGraph: {
+      type: 'website',
+      siteName: 'CasaJusta Lanzarote',
+      title: t.meta.title,
+      description: t.meta.desc,
+      locale: OG_LOCALE[lang],
+      alternateLocale: LOCALES.filter((l) => l !== lang).map((l) => OG_LOCALE[l]),
+    },
+    twitter: { card: 'summary_large_image', title: t.meta.title, description: t.meta.desc },
+    formatDetection: { telephone: false, email: false, address: false },
   }
 }
 

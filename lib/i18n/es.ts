@@ -3,8 +3,11 @@
 
 export const es = {
   meta: {
-    title: 'CasaJusta Lanzarote — alquiler transparente para la isla',
-    desc: 'Evalúa si tu alquiler es justo, compáralo con los datos reales de Lanzarote y súmate a la comunidad que exige transparencia en la vivienda.',
+    title: 'Precio del alquiler en Lanzarote por municipio | CasaJusta',
+    desc: '¿Pagas demasiado de alquiler en Lanzarote? Compara tu precio con datos reales por municipio, de vecinos y de Hacienda. Anónimo y gratis.',
+    ogAlt: 'CasaJusta Lanzarote: observatorio del precio del alquiler por municipio',
+    ogLine: 'Observatorio del alquiler en Lanzarote',
+    ogSub: 'Compara tu alquiler con datos reales por municipio. Anónimo.',
     obsTitle: 'Observatorio del alquiler — CasaJusta Lanzarote',
     obsDesc: 'Lo que se paga de verdad en Lanzarote, contado por quien alquila: precios, subidas al renovar y abusos por municipio.',
     privacyTitle: 'Privacidad — CasaJusta Lanzarote',

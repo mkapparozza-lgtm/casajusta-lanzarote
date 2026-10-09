@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { isLocale } from '@/lib/domain'
+import { MUNICIPIO_IDS, isLocale, municipioName } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
+import { languageAlternates, SITE_URL } from '@/lib/site'
+import { OFFICIAL, OFFICIAL_YEAR } from '@/lib/official'
 import { getCommunityRefs, getObservatoryData } from '@/lib/server/observatory'
 import { getSupportData, supportSectionEnabled } from '@/lib/server/support'
 import { SiteHeader } from '@/components/SiteHeader'
@@ -20,7 +22,7 @@ export const dynamic = 'force-dynamic'
 export async function generateMetadata({ params }: PageProps<'/[lang]'>): Promise<Metadata> {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  return { alternates: { canonical: `/${lang}`, languages: { es: '/es', it: '/it', en: '/en' } } }
+  return { alternates: { canonical: `/${lang}`, languages: languageAlternates('') } }
 }
 
 export default async function Home({ params, searchParams }: PageProps<'/[lang]'>) {
@@ -55,8 +57,41 @@ export default async function Home({ params, searchParams }: PageProps<'/[lang]'
     [t.method.m6h, t.method.m6p],
   ]
 
+  // Datos estructurados (schema.org) para buscadores. Solo datos públicos: nunca casos de la comunidad.
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        url: `${SITE_URL}/${lang}`,
+        name: 'CasaJusta Lanzarote',
+        description: t.meta.desc,
+        inLanguage: lang,
+      },
+      {
+        '@type': 'Dataset',
+        name: `${t.obs.officialH2} (${OFFICIAL_YEAR})`,
+        description: t.obs.officialLead.replace('{year}', String(OFFICIAL_YEAR)),
+        url: `${SITE_URL}/${lang}#oficial`,
+        inLanguage: lang,
+        isAccessibleForFree: true,
+        temporalCoverage: String(OFFICIAL_YEAR),
+        spatialCoverage: { '@type': 'Place', name: 'Lanzarote, Islas Canarias, España' },
+        isBasedOn: 'https://serpavi.mivau.gob.es/',
+        variableMeasured: MUNICIPIO_IDS.map((id) => ({
+          '@type': 'PropertyValue',
+          name: `${municipioName(id)} — €/m²`,
+          value: OFFICIAL[id].eurM2,
+          unitText: 'EUR/m2/mes',
+        })),
+      },
+    ],
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       <SeedBanner show={hasSeed || Boolean(support?.hasSeed)} text={t.seedBanner} />
       <SiteHeader
         lang={lang}
