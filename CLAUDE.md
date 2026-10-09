@@ -55,6 +55,14 @@ El usuario habla italiano: explicarle todo en italiano.
   (obligatorio en producción), detección de picos → `status='review'` (no cuenta hasta que admin publique).
   El mensaje al usuario no revela si su caso fue a revisión.
 
+## SEO (9-oct-2026)
+- Títulos/descripciones por idioma en `meta.*` de los diccionarios (palabras clave "precio alquiler Lanzarote").
+- `app/robots.ts` (bloquea /api y /*/admin), `app/sitemap.ts` (home + legales × 3 idiomas, hreflang + x-default),
+  `app/[lang]/opengraph-image.tsx` (imagen 1200×630 con bandera y dato SERPAVI), JSON-LD WebSite + Dataset en la home,
+  `public/llms.txt`. hreflang con `languageAlternates()` de `lib/site.ts`.
+- Deploy: si un push a master NO dispara el deploy en Vercel (pasó el 9-oct), publicar con `npx vercel --prod --yes`
+  desde esta carpeta (proyecto `casajusta-lanzarote`, comprobar `.vercel/project.json`).
+
 ## Datos oficiales por municipio (SERPAVI, añadido 9-oct-2026)
 - `lib/official.ts` (GENERADO desde el Excel oficial del Ministerio de Vivienda, datos fiscales 2024): mediana
   €/m² de pisos (vivienda colectiva), alquiler mensual, superficie, nº de pisos declarados, y 2019 para la variación.
