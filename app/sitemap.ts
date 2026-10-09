@@ -1,9 +1,17 @@
 import type { MetadataRoute } from 'next'
 import { LOCALES } from '@/lib/domain'
+import { ARTICLES } from '@/lib/news'
 import { LEGAL_UPDATED, SITE_URL, languageAlternates } from '@/lib/site'
 
-const PAGES: { path: string; priority: number; changeFrequency: 'daily' | 'yearly'; lastModified?: string }[] = [
+const PAGES: { path: string; priority: number; changeFrequency: 'daily' | 'weekly' | 'yearly'; lastModified?: string }[] = [
   { path: '', priority: 1, changeFrequency: 'daily' },
+  { path: 'noticias', priority: 0.8, changeFrequency: 'daily', lastModified: ARTICLES[0]?.date },
+  ...ARTICLES.map((a) => ({
+    path: `noticias/${a.slug}`,
+    priority: 0.7,
+    changeFrequency: 'weekly' as const,
+    lastModified: a.updated ?? a.date,
+  })),
   { path: 'privacidad', priority: 0.2, changeFrequency: 'yearly', lastModified: LEGAL_UPDATED },
   { path: 'aviso-legal', priority: 0.2, changeFrequency: 'yearly', lastModified: LEGAL_UPDATED },
 ]

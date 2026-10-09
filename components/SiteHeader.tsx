@@ -35,6 +35,9 @@ export function SiteHeader({ lang, t, cta }: Props) {
           <Link href={`/${lang}#evaluar`}>{t.evaluar}</Link>
           <Link href={`/${lang}#contexto`}>{t.contexto}</Link>
           <Link href={`/${lang}#actuar`}>{t.actuar}</Link>
+          <Link href={`/${lang}/noticias`} aria-current={rest.startsWith('noticias') ? 'page' : undefined}>
+            {t.noticias}
+          </Link>
         </nav>
         <div className="nav-right">
           <nav className="lang-switch" aria-label={t.lang}>

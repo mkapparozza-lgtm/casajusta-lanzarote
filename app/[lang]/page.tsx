@@ -14,6 +14,9 @@ import { Actions } from '@/components/home/Actions'
 import { Observatory } from '@/components/observatory/Observatory'
 import { CaseForm } from '@/components/observatory/CaseForm'
 import { Support } from '@/components/support/Support'
+import { NewsList } from '@/components/news/NewsList'
+import { ARTICLES } from '@/lib/news'
+import Link from 'next/link'
 
 // Home = observatorio (oct-2026): la página antigua con hero/estadísticas se sustituyó porque
 // parecía igual al sitio viejo. Lee la base de datos en cada petición.
@@ -162,6 +165,16 @@ export default async function Home({ params, searchParams }: PageProps<'/[lang]'
               <p>{t.actions.p}</p>
             </div>
             <Actions lang={lang} t={t.actions} m={t.modal} />
+          </section>
+
+          <section className="block" id="noticias" aria-labelledby="news-h2">
+            <h2 id="news-h2">{t.news.latest}</h2>
+            <NewsList lang={lang} t={t.news} articles={ARTICLES.slice(0, 3)} />
+            <p>
+              <Link href={`/${lang}/noticias`} className="btn">
+                {t.news.all}
+              </Link>
+            </p>
           </section>
 
           {support && <Support lang={lang} t={t} data={support} flash={flash} />}

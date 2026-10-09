@@ -260,9 +260,14 @@ select {
 }
 nav.links {
   display: flex;
-  gap: 24px;
+  gap: 18px;
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
+}
+.brand,
+.nav .btn {
+  white-space: nowrap;
 }
 nav.links a {
   text-decoration: none;
@@ -1420,6 +1425,97 @@ td.out {
   font-size: 14px;
 }
 
+/* ---------- noticias ---------- */
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+}
+.news-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.news-item time {
+  font-size: 13px;
+  color: var(--muted);
+}
+.news-item h3 {
+  font-size: 18px;
+  line-height: 1.25;
+}
+.news-item h3 a {
+  text-decoration: none;
+}
+.news-item h3 a:hover {
+  text-decoration: underline;
+}
+.news-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  flex-grow: 1;
+}
+.news-read {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+}
+.article p,
+.article li {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.65;
+}
+.article .meta,
+.article .meta a {
+  color: var(--muted);
+  font-size: 14px;
+}
+.article ul,
+.article ol {
+  padding-left: 22px;
+  margin: 0 0 14px;
+}
+.article li {
+  margin-bottom: 6px;
+}
+.article blockquote {
+  margin: 20px 0;
+  padding: 4px 0 4px 18px;
+  border-left: 4px solid var(--red);
+}
+.article blockquote p {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+.article blockquote cite {
+  font-style: normal;
+  font-size: 14px;
+  color: var(--muted);
+}
+.article .sources {
+  margin-top: 36px;
+  border-top: 1px solid var(--line);
+}
+.article .sources li {
+  font-size: 14px;
+  color: var(--muted);
+}
+.article .sources a {
+  color: var(--blue);
+}
+
 /* ---------- footer ---------- */
 .site-footer {
   border-top: 1px solid var(--line);
@@ -1590,7 +1686,7 @@ td.out {
 }
 
 /* ---------- responsive ---------- */
-@media (max-width: 960px) {
+@media (max-width: 1180px) {
   nav.links {
     display: none;
   }

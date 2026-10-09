@@ -21,6 +21,7 @@ export const en: Dict = {
     cta: 'Evaluate your rent',
     apoya: 'Support a goal',
     addCase: 'Add your case',
+    noticias: 'News',
     lang: 'Language',
     home: 'CasaJusta Lanzarote, home',
   },
@@ -140,6 +141,20 @@ export const en: Dict = {
     signSubject: "Petition: review the Cabildo's stance on rental prices in Lanzarote",
     signEmailBody:
       "Dear Cabildo de Lanzarote,\n\nI'm joining the citizen petition led by CasaJusta Lanzarote asking you to review the decision not to declare the island a stressed residential market area, and to take effective action on rental prices.\n\nHundreds of residents cannot access decent housing at reasonable prices. I ask that this issue be treated with the urgency it deserves.\n\nThank you for your attention.",
+  },
+  news: {
+    metaTitle: 'News on housing and rent in Lanzarote | CasaJusta',
+    metaDesc: "Lanzarote's housing emergency: protests, public housing, laws and rent data, with verified sources.",
+    h1: 'Housing news from Lanzarote',
+    lead: "The island's housing emergency, explained with data and always with sources. No rumours.",
+    latest: 'Latest news',
+    all: 'See all news',
+    read: 'Read',
+    published: 'Published {date}',
+    updated: 'Updated {date}',
+    sources: 'Sources',
+    back: 'All news',
+    disclaimer: 'CasaJusta summarises information published by other media and official sources, cited above. It is not legal advice.',
   },
   cookies: {
     title: 'Statistics cookies',

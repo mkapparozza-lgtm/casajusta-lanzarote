@@ -6,6 +6,11 @@
 - [Observatorio y evaluador (ES)](https://casajustalanzarote.com/es): mediana del alquiler por municipio, subidas al renovar, abusos más señalados, evaluador y formulario anónimo.
 - [Osservatorio (IT)](https://casajustalanzarote.com/it)
 - [Observatory (EN)](https://casajustalanzarote.com/en)
+- [Noticias](https://casajustalanzarote.com/es/noticias): actualidad de la emergencia habitacional en Lanzarote, con fuentes.
+  - [Acampada por la vivienda en Arrecife](https://casajustalanzarote.com/es/noticias/acampada-vivienda-arrecife-octubre-2026)
+  - [Playa Blanca: 118 viviendas públicas](https://casajustalanzarote.com/es/noticias/playa-blanca-viviendas-publicas-familias-caravanas)
+  - [El alquiler en Lanzarote según Hacienda](https://casajustalanzarote.com/es/noticias/alquiler-lanzarote-hacienda-subida-por-municipio)
+  - [Contratos de temporada y Ley 7/2026](https://casajustalanzarote.com/es/noticias/contratos-de-temporada-canarias-ley-7-2026)
 - [Privacidad](https://casajustalanzarote.com/es/privacidad)
 - [Aviso legal](https://casajustalanzarote.com/es/aviso-legal)
 

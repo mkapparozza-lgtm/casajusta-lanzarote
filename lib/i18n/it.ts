@@ -21,6 +21,7 @@ export const it: Dict = {
     cta: 'Valuta il tuo affitto',
     apoya: 'Sostieni un obiettivo',
     addCase: 'Aggiungi il tuo caso',
+    noticias: 'Notizie',
     lang: 'Lingua',
     home: 'CasaJusta Lanzarote, home',
   },
@@ -140,6 +141,20 @@ export const it: Dict = {
     signSubject: 'Petizione: rivedere la posizione del Cabildo sui prezzi degli affitti a Lanzarote',
     signEmailBody:
       "Gentile Cabildo di Lanzarote,\n\nMi unisco alla petizione cittadina promossa da CasaJusta Lanzarote per chiedere di rivedere la decisione di non dichiarare l'isola zona di mercato residenziale teso, e di adottare misure efficaci sul prezzo degli affitti.\n\nCentinaia di residenti non possono accedere a un alloggio dignitoso a prezzi ragionevoli. Chiedo che questo tema venga trattato con l'urgenza che merita.\n\nGrazie per l'attenzione.",
+  },
+  news: {
+    metaTitle: 'Notizie su casa e affitti a Lanzarote | CasaJusta',
+    metaDesc: "Attualità dell'emergenza abitativa a Lanzarote: proteste, case pubbliche, leggi e dati sugli affitti, con fonti verificate.",
+    h1: 'Notizie sulla casa a Lanzarote',
+    lead: "Attualità dell'emergenza abitativa sull'isola, spiegata con i dati e sempre con le fonti. Niente voci.",
+    latest: 'Ultime notizie',
+    all: 'Vedi tutte le notizie',
+    read: 'Leggi',
+    published: 'Pubblicato il {date}',
+    updated: 'Aggiornato il {date}',
+    sources: 'Fonti',
+    back: 'Tutte le notizie',
+    disclaimer: 'CasaJusta riassume informazioni pubblicate da altri media e fonti ufficiali, citate sopra. Non è consulenza legale.',
   },
   cookies: {
     title: 'Cookie statistici',

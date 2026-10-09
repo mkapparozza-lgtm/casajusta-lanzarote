@@ -63,6 +63,14 @@ El usuario habla italiano: explicarle todo en italiano.
 - Deploy: si un push a master NO dispara el deploy en Vercel (pasó el 9-oct), publicar con `npx vercel --prod --yes`
   desde esta carpeta (proyecto `casajusta-lanzarote`, comprobar `.vercel/project.json`).
 
+## Noticias (10-oct-2026)
+- `/[lang]/noticias` (lista) y `/[lang]/noticias/[slug]` (artículo, estático, JSON-LD NewsArticle). Bloque "Últimas
+  noticias" en la home y enlace en menú y pie.
+- Artículos en `lib/news/articles/*.ts` (ES/IT/EN, bloques de texto plano, SIN HTML) y registrados en `lib/news/index.ts`.
+- Reglas editoriales: cada artículo con fuentes verificadas en `sources`; afirmaciones y acusaciones SIEMPRE atribuidas
+  ("según…"); tono institucional; nota final si algo no está confirmado; nunca inventar cifras ni citas.
+- Tras publicar un artículo: añadirlo a `public/llms.txt`, deploy y `npm run indexnow`.
+
 ## Cookies y Google Analytics (10-oct-2026, decisión del usuario)
 - `components/CookieConsent.tsx`: GA4 (`NEXT_PUBLIC_GA_ID`) se carga SOLO tras "Aceptar". Rechazar al mismo nivel
   (AEPD). Cookie técnica `cj_consent` (6 meses). Enlace "Cookies" en el pie para cambiar; al rechazar se borran _ga*.
