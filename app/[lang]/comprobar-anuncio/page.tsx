@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { isLocale } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
-import { languageAlternates } from '@/lib/site'
+import { OG_LOCALE, languageAlternates } from '@/lib/site'
 import { SiteHeader } from '@/components/SiteHeader'
 import { ScamChecker } from '@/components/scam/ScamChecker'
 import { SCAM_GUIDE_SLUG } from '@/lib/scam'
@@ -11,10 +11,21 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/comprobar-
   const { lang } = await params
   if (!isLocale(lang)) return {}
   const t = getDict(lang)
+  const ogTitle = `⚠️ ${t.scam.ogTitle} ${t.scam.ogSub}`
   return {
     title: t.scam.metaTitle,
     description: t.scam.metaDesc,
     alternates: { canonical: `/${lang}/comprobar-anuncio`, languages: languageAlternates('comprobar-anuncio') },
+    // Lo que se ve al compartir el enlace en Facebook o WhatsApp.
+    openGraph: {
+      type: 'website',
+      siteName: 'CasaJusta Lanzarote',
+      title: ogTitle,
+      description: t.scam.metaDesc,
+      url: `/${lang}/comprobar-anuncio`,
+      locale: OG_LOCALE[lang],
+    },
+    twitter: { card: 'summary_large_image', title: ogTitle, description: t.scam.metaDesc },
   }
 }
 

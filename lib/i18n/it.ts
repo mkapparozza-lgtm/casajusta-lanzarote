@@ -203,6 +203,10 @@ export const it: Dict = {
     privacy: 'Questo strumento non salva né invia le tue risposte.',
     homeText: 'Hai visto un appartamento o una stanza sui social? Prima di pagare qualsiasi cosa, controlla se ha i segnali tipici di una truffa.',
     homeCta: 'Controlla un annuncio',
+    ogTitle: 'È una truffa?',
+    ogSub: "Controlla un annuncio d'affitto prima di pagare",
+    ogPoints: '8 domande · 1 minuto · gratis e anonimo',
+    ogWarn: 'Non pagare mai prima di vedere la casa',
     q: {
       payBefore: 'Ti chiedono soldi (caparra, prenotazione o cauzione) prima di vedere la casa di persona?',
       away: "L'inserzionista dice di essere via (all'estero, in viaggio, malato) e non può mostrarla?",

@@ -203,6 +203,10 @@ export const en: Dict = {
     privacy: 'This tool does not store or send your answers.',
     homeText: 'Seen a flat or room on social media? Before paying anything, check whether it shows the typical signs of a scam.',
     homeCta: 'Check a listing',
+    ogTitle: 'Is it a scam?',
+    ogSub: 'Check a rental listing before you pay',
+    ogPoints: '8 questions · 1 minute · free and anonymous',
+    ogWarn: 'Never pay before seeing the home',
     q: {
       payBefore: 'Are they asking for money (deposit, booking fee) before you see the home in person?',
       away: 'Does the advertiser say they are away (abroad, travelling, ill) and cannot show it?',

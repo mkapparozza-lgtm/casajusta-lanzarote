@@ -204,6 +204,10 @@ export const es = {
     privacy: 'Esta herramienta no guarda ni envía tus respuestas.',
     homeText: '¿Has visto un piso o una habitación en redes sociales? Antes de pagar nada, comprueba si tiene las señales típicas de estafa.',
     homeCta: 'Comprobar un anuncio',
+    ogTitle: '¿Es una estafa?',
+    ogSub: 'Comprueba un anuncio de alquiler antes de pagar',
+    ogPoints: '8 preguntas · 1 minuto · gratis y anónimo',
+    ogWarn: 'Nunca pagues antes de ver la vivienda',
     q: {
       payBefore: '¿Te piden dinero (señal, reserva o fianza) antes de ver la vivienda en persona?',
       away: '¿El anunciante dice estar fuera (en el extranjero, de viaje, enfermo) y no puede enseñarla?',
