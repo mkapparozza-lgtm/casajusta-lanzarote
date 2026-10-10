@@ -1,13 +1,15 @@
 import { acampadaArrecife } from './articles/acampada-arrecife'
 import { contratosTemporada } from './articles/contratos-temporada'
 import { hacienda2024 } from './articles/hacienda-2024'
+import { desahucios } from './articles/desahucios'
 import { playaBlanca } from './articles/playa-blanca'
+import { subidaRenovar } from './articles/subida-renovar'
 import type { Article } from './types'
 
 export type { Article, Block, Source } from './types'
 
 // Para publicar un artículo nuevo: crear lib/news/articles/<nombre>.ts (con fuentes) y añadirlo aquí.
-const ALL: Article[] = [acampadaArrecife, playaBlanca, hacienda2024, contratosTemporada]
+const ALL: Article[] = [acampadaArrecife, desahucios, subidaRenovar, playaBlanca, hacienda2024, contratosTemporada]
 
 /** Más recientes primero (a igual fecha, el orden de ALL). */
 export const ARTICLES: Article[] = ALL.map((a, i) => ({ a, i }))
