@@ -16,9 +16,13 @@ export async function clientInfo(): Promise<{ ip: string; ua: string }> {
   return { ip, ua: h.get('user-agent') ?? '' }
 }
 
-/** Hash HMAC no reversible del dispositivo. La IP nunca se guarda en claro. */
-export function deviceHash(ip: string, ua: string): string {
-  return createHmac('sha256', secret('DEVICE_HASH_SECRET')).update(`${ip}|${ua}`).digest('hex')
+/**
+ * Hash HMAC no reversible del dispositivo. La IP nunca se guarda en claro.
+ * `scope` separa usos (p. ej. 'report', 'support:123') para que los hashes no se puedan relacionar entre sí.
+ */
+export function deviceHash(ip: string, ua: string, scope?: string): string {
+  const input = scope ? `${scope}|${ip}|${ua}` : `${ip}|${ua}`
+  return createHmac('sha256', secret('DEVICE_HASH_SECRET')).update(input).digest('hex')
 }
 
 function rateLimitHours(): number {

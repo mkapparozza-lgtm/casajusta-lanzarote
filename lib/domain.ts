@@ -57,13 +57,11 @@ export const LIMITS = {
   price: { min: 100, max: 6000 },
   donation: { min: 1, max: 500 },
   otherText: { min: 3, max: 200 },
+  report: { min: 30, max: 600 },
 } as const
 
-/**
- * Limpia el texto libre de "Otro": quita emails, teléfonos y enlaces antes de guardarlo.
- * Ese texto nunca se publica (solo lo ve el admin), pero así se reduce el riesgo de que contenga datos personales.
- */
-export function scrubOtherText(input: string): string {
+/** Quita emails, enlaces y teléfonos de un texto libre y normaliza espacios, recortando a `max`. */
+export function scrubText(input: string, max: number): string {
   return input
     .replace(/[\u0000-\u001f\u007f]+/g, ' ')
     .replace(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g, '[email]')
@@ -71,7 +69,15 @@ export function scrubOtherText(input: string): string {
     .replace(/\+?\d[\d\s.-]{7,}\d/g, '[teléfono]')
     .replace(/\s+/g, ' ')
     .trim()
-    .slice(0, LIMITS.otherText.max)
+    .slice(0, max)
+}
+
+/**
+ * Limpia el texto libre de "Otro": quita emails, teléfonos y enlaces antes de guardarlo.
+ * Ese texto nunca se publica (solo lo ve el admin), pero así se reduce el riesgo de que contenga datos personales.
+ */
+export function scrubOtherText(input: string): string {
+  return scrubText(input, LIMITS.otherText.max)
 }
 
 export type Locale = 'es' | 'it' | 'en'

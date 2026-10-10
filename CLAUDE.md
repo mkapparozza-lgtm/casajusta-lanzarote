@@ -63,6 +63,14 @@ El usuario habla italiano: explicarle todo en italiano.
 - Deploy: si un push a master NO dispara el deploy en Vercel (pasó el 9-oct), publicar con `npx vercel --prod --yes`
   desde esta carpeta (proyecto `casajusta-lanzarote`, comprobar `.vercel/project.json`).
 
+## Mapa de denuncias (10-oct-2026)
+- `/[lang]/denuncias`: mapa 4×3 con nº de testimonios publicados por municipio, filtro por tipo, lista con
+  «A mí también me pasó» (+1, una vez por dispositivo: tabla `report_supports`, hash con el id del testimonio) y formulario.
+- Tabla `reports` (migración 003). TODO entra como `pending`; solo el admin publica (pestaña «Testimonios por revisar»,
+  puede editar el texto). Texto 30–600, limpio de emails/teléfonos/enlaces (`scrubText`). Turnstile + 1 envío/día.
+- Riesgo legal: no publicar nombres de personas, propietarios, empresas o agencias, ni acusaciones a terceros
+  identificables. Ante la duda, rechazar o editar.
+
 ## Noticias (10-oct-2026)
 - `/[lang]/noticias` (lista) y `/[lang]/noticias/[slug]` (artículo, estático, JSON-LD NewsArticle). Bloque "Últimas
   noticias" en la home y enlace en menú y pie.

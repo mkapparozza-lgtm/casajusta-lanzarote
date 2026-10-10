@@ -34,7 +34,9 @@ export function SiteHeader({ lang, t, cta }: Props) {
           <Link href={`/${lang}#mapa`}>{t.observatorio}</Link>
           <Link href={`/${lang}#evaluar`}>{t.evaluar}</Link>
           <Link href={`/${lang}#contexto`}>{t.contexto}</Link>
-          <Link href={`/${lang}#actuar`}>{t.actuar}</Link>
+          <Link href={`/${lang}/denuncias`} aria-current={rest.startsWith('denuncias') ? 'page' : undefined}>
+            {t.denuncias}
+          </Link>
           <Link href={`/${lang}/noticias`} aria-current={rest.startsWith('noticias') ? 'page' : undefined}>
             {t.noticias}
           </Link>

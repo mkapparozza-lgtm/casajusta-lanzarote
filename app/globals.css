@@ -1516,6 +1516,82 @@ td.out {
   color: var(--blue);
 }
 
+/* ---------- mapa de denuncias ---------- */
+.rules {
+  padding-left: 20px;
+  margin: 10px 0 16px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.rules li {
+  margin-bottom: 8px;
+}
+.count-note {
+  font-size: 16px;
+  color: var(--muted);
+  font-family: var(--text);
+  font-weight: 500;
+}
+.report-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 14px;
+}
+.report {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.report-meta {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.report-meta b {
+  color: var(--ink);
+}
+.report-body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  flex-grow: 1;
+}
+.report-lang {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+.support-btn {
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.support-btn:hover {
+  border-color: var(--ink);
+}
+.support-btn.done {
+  background: color-mix(in srgb, var(--green) 14%, transparent);
+  border-color: var(--green);
+  color: var(--green);
+  cursor: default;
+}
+.f select {
+  width: 100%;
+}
+
 /* ---------- footer ---------- */
 .site-footer {
   border-top: 1px solid var(--line);

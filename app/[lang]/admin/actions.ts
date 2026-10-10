@@ -43,6 +43,36 @@ export async function toggleVerified(form: FormData): Promise<void> {
   refresh()
 }
 
+const REPORT_STATUSES = ['pending', 'published', 'rejected'] as const
+
+/** Guarda el texto (editado por el admin para quitar datos personales) y cambia el estado de un testimonio. */
+export async function saveReport(form: FormData): Promise<void> {
+  await requireAdmin()
+  const id = Number(form.get('id'))
+  const status = form.get('status')
+  const body = String(form.get('body') ?? '').replace(/\s+/g, ' ').trim()
+  if (!Number.isInteger(id) || !REPORT_STATUSES.includes(status as (typeof REPORT_STATUSES)[number])) return
+  if (body.length < 30 || body.length > 600) return
+  const db = await getDb()
+  await db.query(
+    `update reports set body = $1, status = $2,
+            published_at = case when $2 = 'published' then coalesce(published_at, now()) else published_at end
+      where id = $3`,
+    [body, status, id],
+  )
+  refresh()
+}
+
+/** Borrado definitivo de un testimonio rechazado. */
+export async function deleteReport(form: FormData): Promise<void> {
+  await requireAdmin()
+  const id = Number(form.get('id'))
+  if (!Number.isInteger(id)) return
+  const db = await getDb()
+  await db.query(`delete from reports where id = $1 and status = 'rejected'`, [id])
+  refresh()
+}
+
 /** Borrado definitivo, solo para casos ya descartados. */
 export async function deleteCase(form: FormData): Promise<void> {
   await requireAdmin()

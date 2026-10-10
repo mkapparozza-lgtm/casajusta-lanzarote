@@ -14,7 +14,9 @@ import {
   addManualDonation,
   deleteCase,
   deleteLedgerEntry,
+  deleteReport,
   logout,
+  saveReport,
   setCaseStatus,
   toggleVerified,
   updateGoalTarget,
@@ -23,12 +25,20 @@ import {
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Admin — CasaJusta', robots: { index: false, follow: false } }
 
-type Tab = 'review' | 'published' | 'discarded' | 'support'
+type Tab = 'review' | 'published' | 'discarded' | 'reports' | 'support'
 const TABS: { id: Tab; label: string }[] = [
-  { id: 'review', label: 'En revisión' },
-  { id: 'published', label: 'Publicados' },
-  { id: 'discarded', label: 'Descartados' },
+  { id: 'reports', label: 'Testimonios por revisar' },
+  { id: 'review', label: 'Casos en revisión' },
+  { id: 'published', label: 'Casos publicados' },
+  { id: 'discarded', label: 'Casos descartados' },
   { id: 'support', label: 'Objetivos y cuentas' },
+]
+
+type ReportStatus = 'pending' | 'published' | 'rejected'
+const REPORT_VIEWS: { id: ReportStatus; label: string }[] = [
+  { id: 'pending', label: 'Pendientes' },
+  { id: 'published', label: 'Publicados' },
+  { id: 'rejected', label: 'Rechazados' },
 ]
 
 type CaseRow = {
@@ -70,13 +80,16 @@ export default async function AdminPage({ params, searchParams }: PageProps<'/[l
 
   const sp = await searchParams
   const tabs = TABS.filter((x) => x.id !== 'support' || supportSectionEnabled())
-  const tab: Tab = tabs.some((x) => x.id === sp.tab) ? (sp.tab as Tab) : 'review'
+  const tab: Tab = tabs.some((x) => x.id === sp.tab) ? (sp.tab as Tab) : 'reports'
+  const rview: ReportStatus = REPORT_VIEWS.some((x) => x.id === sp.rs) ? (sp.rs as ReportStatus) : 'pending'
   const db = await getDb()
-  const [counts] = await db.query<{ review: string; published: string; discarded: string }>(
+  const [caseCounts] = await db.query<{ review: string; published: string; discarded: string }>(
     `select count(*) filter (where status = 'review') as review,
             count(*) filter (where status = 'published') as published,
             count(*) filter (where status = 'discarded') as discarded from cases`,
   )
+  const [rc] = await db.query<{ n: string }>(`select count(*) as n from reports where status = 'pending'`)
+  const counts: Record<string, string | undefined> = { ...caseCounts, reports: rc?.n }
 
   return (
     <main id="main" className="wrap admin">
@@ -92,16 +105,99 @@ export default async function AdminPage({ params, searchParams }: PageProps<'/[l
         {tabs.map((x) => (
           <Link key={x.id} href={`/${lang}/admin?tab=${x.id}`} aria-current={tab === x.id ? 'page' : undefined}>
             {x.label}
-            {x.id !== 'support' && counts ? ` (${counts[x.id]})` : ''}
+            {counts[x.id] !== undefined ? ` (${counts[x.id]})` : ''}
           </Link>
         ))}
       </nav>
-      {tab === 'support' ? <SupportAdmin lang={lang} t={t} /> : <CasesAdmin status={tab} />}
+      {tab === 'support' ? (
+        <SupportAdmin lang={lang} t={t} />
+      ) : tab === 'reports' ? (
+        <ReportsAdmin lang={lang} status={rview} />
+      ) : (
+        <CasesAdmin status={tab} />
+      )}
     </main>
   )
 }
 
-async function CasesAdmin({ status }: { status: Exclude<Tab, 'support'> }) {
+async function ReportsAdmin({ lang, status }: { lang: string; status: ReportStatus }) {
+  const db = await getDb()
+  const rows = await db.query<{
+    id: number
+    created_at: string
+    municipio: MunicipioId
+    month: string
+    category: string
+    body: string
+    lang: string
+    supports: number
+    is_seed: boolean
+  }>(
+    `select id, to_char(created_at at time zone 'Atlantic/Canary', 'YYYY-MM-DD HH24:MI') as created_at, municipio,
+            to_char(month, 'YYYY-MM') as month, category, body, lang, supports, is_seed
+       from reports where status = $1 order by created_at desc limit 200`,
+    [status],
+  )
+  return (
+    <>
+      <nav className="admin-tabs" aria-label="Estado de los testimonios">
+        {REPORT_VIEWS.map((v) => (
+          <Link key={v.id} href={`/${lang}/admin?tab=reports&rs=${v.id}`} aria-current={status === v.id ? 'page' : undefined}>
+            {v.label}
+          </Link>
+        ))}
+      </nav>
+      <p className="lead" style={{ color: 'var(--muted)' }}>
+        Antes de publicar, quita del texto nombres de personas, propietarios, empresas o agencias, direcciones y cualquier dato
+        que identifique a alguien. Publica solo testimonios en primera persona y sin acusaciones a terceros identificables.
+      </p>
+      {rows.length === 0 ? (
+        <div className="empty">No hay testimonios.</div>
+      ) : (
+        rows.map((r) => (
+          <form key={r.id} action={saveReport} className="card" style={{ marginBottom: 14 }}>
+            <input type="hidden" name="id" value={r.id} />
+            <p style={{ margin: '0 0 8px', fontSize: 13 }}>
+              <b>{municipioName(r.municipio)}</b> · {r.category} · mes {r.month} · enviado {r.created_at} · idioma {r.lang}
+              {status === 'published' && ` · ${r.supports} apoyos`} {r.is_seed && <span className="pill seed">ejemplo</span>}
+            </p>
+            <textarea
+              name="body"
+              defaultValue={r.body}
+              rows={4}
+              minLength={30}
+              maxLength={600}
+              aria-label="Texto del testimonio"
+              style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid var(--line)', font: 'inherit' }}
+            />
+            <div className="admin-form" style={{ marginTop: 8 }}>
+              <button className="btn mini btn-primary" type="submit" name="status" value="published">
+                {status === 'published' ? 'Guardar cambios' : 'Publicar'}
+              </button>
+              {status !== 'rejected' && (
+                <button className="btn mini" type="submit" name="status" value="rejected">
+                  Rechazar
+                </button>
+              )}
+              {status !== 'pending' && (
+                <button className="btn mini" type="submit" name="status" value="pending">
+                  Volver a pendientes
+                </button>
+              )}
+              {status === 'rejected' && (
+                <button className="btn mini" type="submit" formAction={deleteReport}>
+                  Borrar definitivamente
+                </button>
+              )}
+            </div>
+          </form>
+        ))
+      )}
+    </>
+  )
+}
+
+async function CasesAdmin({ status }: { status: Exclude<Tab, 'support' | 'reports'> }) {
   const db = await getDb()
   const rows = await db.query<CaseRow>(
     `select id, to_char(created_at at time zone 'Atlantic/Canary', 'YYYY-MM-DD HH24:MI') as created_at, municipio,

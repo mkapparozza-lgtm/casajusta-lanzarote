@@ -28,6 +28,7 @@ if (process.env.DATABASE_URL && process.env.SEED_ALLOW_REMOTE !== 'true' && !cle
 const db = await createDb()
 await migrate(db)
 
+await db.query('delete from reports where is_seed')
 await db.query('delete from donations where is_seed')
 await db.query('delete from ledger_entries where is_seed')
 const removed = await db.query<{ id: number }>('delete from cases where is_seed returning id')
@@ -135,5 +136,22 @@ await db.query(
   [`${prevMonth}-18`, 'Pago al despacho por la revisión legal de las cartas (EJEMPLO)', -18000],
 )
 
-console.log(`[${db.kind}] Insertados ${rows.length} casos, 61 aportaciones y 1 movimiento de EJEMPLO.`)
+// Testimonios de EJEMPLO (inventados, marcados is_seed) para ver el mapa de denuncias en local.
+const SAMPLE_REPORTS: [string, string, string, string, number][] = [
+  ['tias', 'temporada', 'es', 'EJEMPLO. Llevo tres años en el mismo piso con contratos de once meses. Cada vez que se renueva me suben el precio y me dicen que es un alquiler de temporada.', 14],
+  ['arrecife', 'devolucion', 'es', 'EJEMPLO. Dejé el piso en perfecto estado hace cuatro meses y todavía no me han devuelto la fianza de dos mensualidades. No contestan a los mensajes.', 9],
+  ['arrecife', 'honorarios', 'es', 'EJEMPLO. La inmobiliaria me cobró un mes de alquiler como honorarios para poder firmar el contrato, aunque el piso lo había anunciado el propietario.', 6],
+  ['yaiza', 'subida', 'it', 'ESEMPIO. Al rinnovo mi hanno aumentato l’affitto di 250 euro al mese senza nessun lavoro nella casa. O pagavo o dovevo andarmene entro un mese.', 11],
+  ['teguise', 'anuncio', 'en', 'SAMPLE. The flat in the listing had a sea view and a terrace. When I went to see it, it was a different flat with no windows facing the sea.', 3],
+  ['sanbartolome', 'reparaciones', 'es', 'EJEMPLO. Hay humedad en el dormitorio desde el invierno pasado. El propietario dice que no es cosa suya y la casa sigue igual.', 4],
+]
+for (const [muni, cat, lng, body, sup] of SAMPLE_REPORTS) {
+  await db.query(
+    `insert into reports (municipio, month, category, body, lang, status, published_at, supports, is_seed)
+     values ($1, $2, $3, $4, $5, 'published', now(), $6, true)`,
+    [muni, monthToDate(latest), cat, body, lng, sup],
+  )
+}
+
+console.log(`[${db.kind}] Insertados ${rows.length} casos, ${SAMPLE_REPORTS.length} testimonios, 61 aportaciones y 1 movimiento de EJEMPLO.`)
 console.log('Recuerda: solo se ven con SHOW_SEED_DATA=true.')
