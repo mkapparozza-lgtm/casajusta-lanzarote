@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { isAbuse, isLocale } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
 import { getPublishedReports } from '@/lib/server/reports'
-import { languageAlternates } from '@/lib/site'
+import { languageAlternates, pageOpenGraph } from '@/lib/site'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SeedBanner } from '@/components/SeedBanner'
 import { Reports } from '@/components/reports/Reports'
@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/denuncias'
     title: t.reports.metaTitle,
     description: t.reports.metaDesc,
     alternates: { canonical: `/${lang}/denuncias`, languages: languageAlternates('denuncias') },
+    openGraph: pageOpenGraph(lang, 'denuncias', t.reports.metaTitle, t.reports.metaDesc),
   }
 }
 

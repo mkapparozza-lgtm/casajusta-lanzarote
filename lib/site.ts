@@ -15,6 +15,22 @@ export const SITE_URL = (process.env.SITE_URL || 'https://casajustalanzarote.com
 
 export const OG_LOCALE: Record<Locale, string> = { es: 'es_ES', it: 'it_IT', en: 'en_GB' }
 
+/**
+ * Open Graph completo de una página (Facebook pide og:url). Next sustituye el openGraph del layout entero
+ * cuando una página define el suyo, así que siempre se devuelve el objeto completo.
+ */
+export function pageOpenGraph(lang: Locale, path: string, title: string, description: string) {
+  const p = path ? `/${path.replace(/^\//, '')}` : ''
+  return {
+    type: 'website' as const,
+    siteName: 'CasaJusta Lanzarote',
+    title,
+    description,
+    url: `/${lang}${p}`,
+    locale: OG_LOCALE[lang],
+  }
+}
+
 /** hreflang de una ruta (sin el prefijo de idioma), con x-default al español. */
 export function languageAlternates(path: string): Record<string, string> {
   const p = path ? `/${path.replace(/^\//, '')}` : ''

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { isLocale } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
 import { ARTICLES } from '@/lib/news'
-import { languageAlternates } from '@/lib/site'
+import { languageAlternates, pageOpenGraph } from '@/lib/site'
 import { SiteHeader } from '@/components/SiteHeader'
 import { NewsList } from '@/components/news/NewsList'
 
@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/noticias'>
     title: t.news.metaTitle,
     description: t.news.metaDesc,
     alternates: { canonical: `/${lang}/noticias`, languages: languageAlternates('noticias') },
+    openGraph: pageOpenGraph(lang, 'noticias', t.news.metaTitle, t.news.metaDesc),
   }
 }
 

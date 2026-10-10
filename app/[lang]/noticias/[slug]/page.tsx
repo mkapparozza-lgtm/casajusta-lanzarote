@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/noticias/[
       siteName: 'CasaJusta Lanzarote',
       title: x.title,
       description: x.description,
+      url: `/${lang}/noticias/${slug}`,
       locale: OG_LOCALE[lang],
       publishedTime: a.date,
       modifiedTime: a.updated ?? a.date,

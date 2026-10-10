@@ -2,15 +2,17 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { isLocale } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
-import { languageAlternates } from '@/lib/site'
+import { languageAlternates, pageOpenGraph } from '@/lib/site'
 import { LegalPage } from '@/components/LegalPage'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/privacidad'>): Promise<Metadata> {
   const { lang } = await params
   if (!isLocale(lang)) return {}
+  const t = getDict(lang)
   return {
-    title: getDict(lang).meta.privacyTitle,
+    title: t.meta.privacyTitle,
     alternates: { canonical: `/${lang}/privacidad`, languages: languageAlternates('privacidad') },
+    openGraph: pageOpenGraph(lang, 'privacidad', t.meta.privacyTitle, t.meta.desc),
   }
 }
 

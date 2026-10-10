@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { MUNICIPIO_IDS, isLocale, municipioName } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
-import { languageAlternates, SITE_URL } from '@/lib/site'
+import { languageAlternates, pageOpenGraph, SITE_URL } from '@/lib/site'
 import { OFFICIAL, OFFICIAL_YEAR } from '@/lib/official'
 import { getCommunityRefs, getObservatoryData } from '@/lib/server/observatory'
 import { getSupportData, supportSectionEnabled } from '@/lib/server/support'
@@ -25,7 +25,11 @@ export const dynamic = 'force-dynamic'
 export async function generateMetadata({ params }: PageProps<'/[lang]'>): Promise<Metadata> {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  return { alternates: { canonical: `/${lang}`, languages: languageAlternates('') } }
+  const t = getDict(lang)
+  return {
+    alternates: { canonical: `/${lang}`, languages: languageAlternates('') },
+    openGraph: pageOpenGraph(lang, '', t.meta.title, t.meta.desc),
+  }
 }
 
 export default async function Home({ params, searchParams }: PageProps<'/[lang]'>) {
