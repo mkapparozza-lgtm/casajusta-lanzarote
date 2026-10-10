@@ -23,6 +23,8 @@ type Props = {
   abuses: Dict['abuses']
   reports: PublicReport[]
   counts: Record<MunicipioId, number>
+  /** Categoría preseleccionada en el formulario (p. ej. 'anuncio' desde el comprobador). */
+  defaultCategory?: AbuseId
 }
 
 const LANG_NAMES: Record<Locale, Record<Locale, string>> = {
@@ -49,7 +51,7 @@ function monthText(key: string, lang: Locale): string {
   )
 }
 
-export function Reports({ lang, t, abuses, reports, counts }: Props) {
+export function Reports({ lang, t, abuses, reports, counts, defaultCategory }: Props) {
   const dark = useDarkMode()
   const [muni, setMuni] = useState<MunicipioId | null>(null)
   const [cat, setCat] = useState<AbuseId | 'all'>('all')
@@ -197,7 +199,7 @@ export function Reports({ lang, t, abuses, reports, counts }: Props) {
       <section className="block" id="contar" aria-labelledby="contar-h2">
         <h2 id="contar-h2">{t.formH2}</h2>
         <p className="lead">{t.formLead}</p>
-        <ReportForm lang={lang} t={t} abuses={abuses} defaultMuni={muni} />
+        <ReportForm lang={lang} t={t} abuses={abuses} defaultMuni={muni} defaultCategory={defaultCategory} />
       </section>
     </>
   )
@@ -208,15 +210,17 @@ function ReportForm({
   t,
   abuses,
   defaultMuni,
+  defaultCategory,
 }: {
   lang: Locale
   t: Dict['reports']
   abuses: Dict['abuses']
   defaultMuni: MunicipioId | null
+  defaultCategory?: AbuseId
 }) {
   const [state, action, pending] = useActionState<ReportResult, FormData>(submitReport, null)
   const [municipio, setMunicipio] = useState<MunicipioId>(defaultMuni ?? 'arrecife')
-  const [category, setCategory] = useState<AbuseId>('temporada')
+  const [category, setCategory] = useState<AbuseId>(defaultCategory ?? 'temporada')
   const [body, setBody] = useState('')
   const [consent, setConsent] = useState(false)
   const [localError, setLocalError] = useState<ReportErrorCode | null>(null)

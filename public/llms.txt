@@ -6,11 +6,13 @@
 - [Observatorio y evaluador (ES)](https://casajustalanzarote.com/es): mediana del alquiler por municipio, subidas al renovar, abusos más señalados, evaluador y formulario anónimo.
 - [Osservatorio (IT)](https://casajustalanzarote.com/it)
 - [Observatory (EN)](https://casajustalanzarote.com/en)
+- [¿Es una estafa? Comprobador de anuncios](https://casajustalanzarote.com/es/comprobar-anuncio): 8 preguntas sobre un anuncio de alquiler y comparación del precio con el municipio; calcula el riesgo de estafa sin guardar datos.
 - [Mapa de denuncias](https://casajustalanzarote.com/es/denuncias): testimonios anónimos y moderados de inquilinos por municipio.
 - [Noticias](https://casajustalanzarote.com/es/noticias): actualidad de la emergencia habitacional en Lanzarote, con fuentes.
   - [Acampada por la vivienda en Arrecife](https://casajustalanzarote.com/es/noticias/acampada-vivienda-arrecife-octubre-2026)
   - [Playa Blanca: 118 viviendas públicas](https://casajustalanzarote.com/es/noticias/playa-blanca-viviendas-publicas-familias-caravanas)
   - [El alquiler en Lanzarote según Hacienda](https://casajustalanzarote.com/es/noticias/alquiler-lanzarote-hacienda-subida-por-municipio)
+  - [Anuncios falsos de alquiler: cómo detectarlos](https://casajustalanzarote.com/es/noticias/anuncio-falso-alquiler-lanzarote-como-detectarlo)
   - [Me quieren desahuciar: qué hacer](https://casajustalanzarote.com/es/noticias/desahucio-que-hacer-lanzarote)
   - [Subida del alquiler al renovar](https://casajustalanzarote.com/es/noticias/subida-alquiler-al-renovar-cuanto-pueden-subir)
   - [Contratos de temporada y Ley 7/2026](https://casajustalanzarote.com/es/noticias/contratos-de-temporada-canarias-ley-7-2026)

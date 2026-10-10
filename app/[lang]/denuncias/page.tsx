@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { isLocale } from '@/lib/domain'
+import { isAbuse, isLocale } from '@/lib/domain'
 import { getDict } from '@/lib/i18n'
 import { getPublishedReports } from '@/lib/server/reports'
 import { languageAlternates } from '@/lib/site'
@@ -22,10 +22,13 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/denuncias'
   }
 }
 
-export default async function DenunciasPage({ params }: PageProps<'/[lang]/denuncias'>) {
+export default async function DenunciasPage({ params, searchParams }: PageProps<'/[lang]/denuncias'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
   const t = getDict(lang)
+  const sp = await searchParams
+  // ?tipo=anuncio llega desde el comprobador de anuncios: preselecciona la categoría del formulario.
+  const defaultCategory = isAbuse(sp.tipo) ? sp.tipo : undefined
   const { reports, counts, hasSeed } = await getPublishedReports()
   return (
     <>
@@ -42,7 +45,14 @@ export default async function DenunciasPage({ params }: PageProps<'/[lang]/denun
             {t.reports.lead}
           </p>
         </section>
-        <Reports lang={lang} t={t.reports} abuses={t.abuses} reports={reports} counts={counts} />
+        <Reports
+          lang={lang}
+          t={t.reports}
+          abuses={t.abuses}
+          reports={reports}
+          counts={counts}
+          defaultCategory={defaultCategory}
+        />
       </main>
     </>
   )

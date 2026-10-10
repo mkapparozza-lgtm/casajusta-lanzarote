@@ -63,6 +63,14 @@ El usuario habla italiano: explicarle todo en italiano.
 - Deploy: si un push a master NO dispara el deploy en Vercel (pasó el 9-oct), publicar con `npx vercel --prod --yes`
   desde esta carpeta (proyecto `casajusta-lanzarote`, comprobar `.vercel/project.json`).
 
+## Comprobador de anuncios (10-oct-2026)
+- `/[lang]/comprobar-anuncio`: 8 preguntas (sí/no/no sé) + precio opcional → riesgo alto/medio/bajo. Lógica pura en
+  `lib/scam.ts` (testeada): pesos 3 = señal típica (pago antes de visitar, anunciante fuera, pago irrecuperable, fotos
+  copiadas), 1 = sospechosa; ≥3 alto. Precio "chollo": vivienda < 75% de la mediana SERPAVI del municipio, habitación < 250 €.
+  Habitación ≥ 450 € = cara pero en la media (509 € Drago): NO es estafa, es abuso de mercado → observatorio.
+- Todo en el navegador, nada se guarda. Si riesgo ≠ bajo: botón a `/denuncias?tipo=anuncio#contar`.
+- Nunca publicar enlaces a anuncios ni nombres de perfiles (difamación; los estafadores cambian de perfil).
+
 ## Mapa de denuncias (10-oct-2026)
 - `/[lang]/denuncias`: mapa 4×3 con nº de testimonios publicados por municipio, filtro por tipo, lista con
   «A mí también me pasó» (+1, una vez por dispositivo: tabla `report_supports`, hash con el id del testimonio) y formulario.

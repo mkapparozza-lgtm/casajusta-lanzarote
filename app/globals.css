@@ -1592,6 +1592,101 @@ td.out {
   width: 100%;
 }
 
+/* ---------- comprobador de anuncios ---------- */
+.scam-banner {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  border: 2px solid var(--red);
+  border-radius: 14px;
+  padding: 18px 22px;
+  background: color-mix(in srgb, var(--red) 6%, var(--surface));
+}
+.scam-banner p {
+  margin: 0;
+  max-width: 70ch;
+}
+.scam-h2 {
+  font-size: clamp(20px, 2.4vw, 24px);
+  margin-bottom: 14px;
+}
+.scam-questions {
+  padding-left: 22px;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+.scam-questions legend {
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.choice {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.choice.on {
+  background: var(--ink);
+  color: var(--paper);
+}
+.choice:has(input:focus-visible) {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+.scam-result {
+  margin-top: 24px;
+  border-radius: 14px;
+  padding: 24px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+}
+.scam-result:focus {
+  outline: none;
+}
+.scam-result.risk-high {
+  border-color: var(--red);
+  background: color-mix(in srgb, var(--red) 7%, var(--surface));
+}
+.scam-result.risk-medium {
+  border-color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 8%, var(--surface));
+}
+.scam-result.risk-low {
+  border-color: var(--green);
+}
+.scam-result h3 {
+  font-size: 17px;
+  margin: 16px 0 6px;
+}
+.scam-result ul {
+  padding-left: 20px;
+  margin: 0;
+}
+.scam-result li {
+  margin-bottom: 6px;
+}
+.scam-price {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--sand);
+  font-size: 15px;
+}
+
 /* ---------- footer ---------- */
 .site-footer {
   border-top: 1px solid var(--line);

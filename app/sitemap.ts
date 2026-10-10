@@ -5,6 +5,7 @@ import { LEGAL_UPDATED, SITE_URL, languageAlternates } from '@/lib/site'
 
 const PAGES: { path: string; priority: number; changeFrequency: 'daily' | 'weekly' | 'yearly'; lastModified?: string }[] = [
   { path: '', priority: 1, changeFrequency: 'daily' },
+  { path: 'comprobar-anuncio', priority: 0.9, changeFrequency: 'weekly' },
   { path: 'denuncias', priority: 0.8, changeFrequency: 'daily' },
   { path: 'noticias', priority: 0.8, changeFrequency: 'daily', lastModified: ARTICLES[0]?.date },
   ...ARTICLES.map((a) => ({

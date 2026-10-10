@@ -25,4 +25,6 @@ export type Article = {
   i18n: Record<Locale, ArticleText>
   /** Fuentes verificadas que respaldan el texto. Obligatorias: no se publica nada sin fuente. */
   sources: Source[]
+  /** Botón opcional al final del artículo hacia una sección del sitio (ruta sin el idioma, p. ej. '/comprobar-anuncio'). */
+  cta?: { path: string; label: Record<Locale, string> }
 }

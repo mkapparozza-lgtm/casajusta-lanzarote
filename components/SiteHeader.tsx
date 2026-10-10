@@ -33,7 +33,9 @@ export function SiteHeader({ lang, t, cta }: Props) {
         <nav className="links" aria-label="Principal">
           <Link href={`/${lang}#mapa`}>{t.observatorio}</Link>
           <Link href={`/${lang}#evaluar`}>{t.evaluar}</Link>
-          <Link href={`/${lang}#contexto`}>{t.contexto}</Link>
+          <Link href={`/${lang}/comprobar-anuncio`} aria-current={rest.startsWith('comprobar-anuncio') ? 'page' : undefined}>
+            {t.estafa}
+          </Link>
           <Link href={`/${lang}/denuncias`} aria-current={rest.startsWith('denuncias') ? 'page' : undefined}>
             {t.denuncias}
           </Link>

@@ -16,6 +16,7 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dict }) {
             </span>
           </div>
           <nav className="foot-links" aria-label="Legal">
+            <Link href={`/${lang}/comprobar-anuncio`}>{t.nav.estafa}</Link>
             <Link href={`/${lang}/denuncias`}>{t.nav.denuncias}</Link>
             <Link href={`/${lang}/noticias`}>{t.nav.noticias}</Link>
             <Link href={`/${lang}/privacidad`}>{t.footer.privacy}</Link>

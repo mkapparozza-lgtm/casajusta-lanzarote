@@ -105,6 +105,15 @@ export default async function Home({ params, searchParams }: PageProps<'/[lang]'
         <main id="main" className="wrap">
           <Observatory lang={lang} t={t} data={data} />
 
+          <aside className="scam-banner" aria-label={t.nav.estafa}>
+            <p>
+              <strong>⚠️ {t.nav.estafa}</strong> {t.scam.homeText}
+            </p>
+            <Link href={`/${lang}/comprobar-anuncio`} className="btn btn-primary">
+              {t.scam.homeCta}
+            </Link>
+          </aside>
+
           {/* "Sí, añadir mi caso" rellena el formulario de abajo. */}
           <section className="block" id="evaluar" aria-label={t.ev.eyebrow}>
             <div className="evaluator">

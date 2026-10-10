@@ -101,6 +101,13 @@ export default async function ArticlePage({ params }: PageProps<'/[lang]/noticia
           {x.body.map((b, i) => (
             <BlockView key={i} b={b} />
           ))}
+          {a.cta && (
+            <p style={{ marginTop: 20 }}>
+              <Link href={`/${lang}${a.cta.path}`} className="btn btn-primary">
+                {a.cta.label[lang]}
+              </Link>
+            </p>
+          )}
           <section className="sources" aria-labelledby="sources-h2" style={{ padding: 0 }}>
             <h2 id="sources-h2">{t.news.sources}</h2>
             <ol>
